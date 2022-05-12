@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  ParamMap,
+  Params,
+  Router,
+} from '@angular/router';
 import { Producto } from '../../interfaces/prodcuto.interface';
 import { ProductosService } from '../../service/productos.service';
 
@@ -12,21 +18,28 @@ export class PorCategoriaComponent implements OnInit {
   productos: Producto[] = [];
   producto!: Producto;
   prodXcate: Producto[] = [];
-  nombre!: string;
+  nombre!: any;
 
   constructor(
     private productoService: ProductosService,
     private router: Router,
     private activeRoute: ActivatedRoute
-  ) {}
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+  }
 
   ngOnInit() {
     console.log('hola');
-    this.activeRoute.params.subscribe((params: Params) => {
-      this.nombre = params['name'];
+    // this.activeRoute.params.subscribe((params: Params) => {
+    //   this.nombre = params['name'];
+    // });
+
+    this.activeRoute.paramMap.subscribe((params: ParamMap) => {
+      this.nombre = params.get('name');
     });
     console.log(this.nombre);
-
     // this.productoService.getProductos().subscribe((productos) => {
     //   this.productos = productos;
     // });
