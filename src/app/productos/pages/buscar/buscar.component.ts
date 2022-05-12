@@ -48,12 +48,12 @@ export class BuscarComponent implements OnInit {
       this.termino = categoria;
       console.log(categoria);
 
-      this.productoService
-        .getProductoXcategoria(categoria)
-        .subscribe((prod) =>
-          this.productoService.categoriaCompleta$.emit(prod)
-        );
-      this.router.navigateByUrl('/home/categoria');
+      // this.productoService
+      //   .getProductoXcategoria(categoria)
+      //   .subscribe((prod) =>
+      //     this.productoService.categoriaCompleta$.emit(prod)
+      //   );
+      this.router.navigateByUrl(`/home/${categoria}`);
       //console.log(prod)
     } else {
       const producto: Producto = event.option.value;
@@ -63,6 +63,7 @@ export class BuscarComponent implements OnInit {
       this.productoService
         .getProductoID(producto._id)
         .subscribe((prod) => this.productoService.producto$.emit(prod));
+      this.router.navigateByUrl(`/home/${producto._id}`);
     }
   }
 }

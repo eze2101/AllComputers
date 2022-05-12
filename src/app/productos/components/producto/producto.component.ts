@@ -10,13 +10,13 @@ import { ProductosService } from '../../service/productos.service';
 export class ProductoComponent implements OnInit {
   producto!: Producto;
 
-  constructor(private productoService: ProductosService) {}
-
-  ngOnInit() {
-    this.productoService.producto$.subscribe((producto) =>
-      this.GetProducto(producto)
+  constructor(private productoService: ProductosService) {
+    this.productoService.producto$.subscribe(
+      (producto) => (this.producto = producto)
     );
   }
+
+  ngOnInit() {}
 
   GetProducto(prod: Producto) {
     (this.producto = prod), console.log(this.producto);

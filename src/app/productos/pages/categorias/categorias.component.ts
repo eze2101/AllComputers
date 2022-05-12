@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../../interfaces/prodcuto.interface';
 import { ProductosService } from '../../service/productos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categorias',
@@ -9,11 +10,19 @@ import { ProductosService } from '../../service/productos.service';
 })
 export class CategoriasComponent implements OnInit {
   categorias!: Categoria[];
-  constructor(private productosService: ProductosService) {}
+  constructor(
+    private productosService: ProductosService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    console.log('cargado');
     this.productosService
       .getCaterogrias()
       .subscribe((categorias) => (this.categorias = categorias));
+  }
+
+  irA(nombre: string) {
+    this.router.navigateByUrl(`/home/${nombre}`);
   }
 }

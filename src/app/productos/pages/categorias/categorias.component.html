@@ -1,5 +1,10 @@
-<div>
-  <div *ngFor="let categoria of categorias">
-    <h2>{{ categoria.name }}</h2>
+<div fxLayout="row wrap" fxLayoutGap="15">
+  <div fxFlex="30" *ngFor="let categoria of categorias">
+    <mat-card (click)="irA(categoria.name)">
+      <mat-card-title>{{ categoria.name }}</mat-card-title>
+      <mat-card-content>
+        <img src="{{ categoria.img }}" alt="imagen categoria"
+      /></mat-card-content>
+    </mat-card>
   </div>
 </div>

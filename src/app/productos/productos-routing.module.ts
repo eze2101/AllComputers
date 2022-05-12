@@ -5,6 +5,7 @@ import { ProductoComponent } from './components/producto/producto.component';
 import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListadoComponent } from './pages/listado/listado.component';
+import { PorCategoriaComponent } from './pages/por-categoria/por-categoria.component';
 
 const routes: Routes = [
   {
@@ -12,12 +13,12 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: 'categoria',
-        component: ListadoComponent,
+        path: ':name',
+        component: PorCategoriaComponent,
       },
       {
-        path: ':id',
-        component: ProductoComponent,
+        path: '',
+        component: CategoriasComponent,
       },
     ],
   },
