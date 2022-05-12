@@ -1,0 +1,9 @@
+.menuSuperior {
+  align-items: center;
+  width: 100%;
+}
+
+.btMenuSUp {
+  display: flex;
+  justify-content: end;
+}

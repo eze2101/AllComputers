@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div fxLayout="row" class="menuSuperior">
+      <span fxFlex="20">AllComputers</span>
+      <app-buscar fxFlex="50"></app-buscar>
+      <div fxLayout="row" fxFlex="30" class="btMenuSUp">
+        <span>{{ usuario.name }}</span>
+        <button mat-button (click)="logOut()">Log Out</button>
+      </div>
+    </div>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <span>Categorias</span>
+    <span class="example-spacer"></span>
+    <mat-icon
+      class="example-icon"
+      aria-hidden="false"
+      aria-label="Example user verified icon"
+      >verified_user</mat-icon
+    >
+  </mat-toolbar-row>
+</mat-toolbar>

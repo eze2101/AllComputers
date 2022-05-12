@@ -1,0 +1,27 @@
+<div *ngIf="!producto; else divProducto">
+  <mat-spinner></mat-spinner>
+  <h2>no hay producto</h2>
+</div>
+
+<ng-template #divProducto>
+  <div fxLayout="row" fxLayoutGap="20">
+    <div fxFlex="50">
+      <h1>{{ producto.name }}</h1>
+      <mat-divider></mat-divider>
+      <h4>categoria: {{ producto.categoria }}</h4>
+      <hr />
+      <h2>Precio: ${{ producto.price }}</h2>
+      <hr />
+      <h3>stock: {{ producto.stock }}</h3>
+    </div>
+
+    <div fxFlex="50">
+      <img
+        src="https://rockcontent.com/es/wp-content/uploads/sites/3/2019/02/pesquisa-de-mercado-1024x538.png"
+        alt="imagen"
+      />
+      <h2>Descripcion:</h2>
+      <span>{{ producto.description }}</span>
+    </div>
+  </div>
+</ng-template>

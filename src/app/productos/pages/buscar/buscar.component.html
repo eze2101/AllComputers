@@ -1,0 +1,24 @@
+<mat-form-field appearance="fill">
+  <input
+    type="text"
+    placeholder="Buscar producto..."
+    aria-label="Number"
+    matInput
+    [(ngModel)]="termino"
+    [matAutocomplete]="auto"
+    (input)="buscando()"
+  />
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="opcionSeleccionada($event)"
+  >
+    <mat-optgroup label="hola">
+      <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+        {{ categoria.name }}</mat-option
+      >
+      <mat-option *ngFor="let producto of productos" [value]="producto">
+        {{ producto.name }}
+      </mat-option>
+    </mat-optgroup>
+  </mat-autocomplete>
+</mat-form-field>

@@ -1,0 +1,14 @@
+<mat-card (click)="verProducto(producto)">
+  <mat-card-title>{{ producto.name }}</mat-card-title>
+
+  <mat-card-content>
+    <img
+      src="https://rockcontent.com/es/wp-content/uploads/sites/3/2019/02/pesquisa-de-mercado-1024x538.png"
+      alt="imagen producto"
+    />
+  </mat-card-content>
+
+  <mat-card-footer>
+    <h2>${{ producto.price }}</h2>
+  </mat-card-footer>
+</mat-card>

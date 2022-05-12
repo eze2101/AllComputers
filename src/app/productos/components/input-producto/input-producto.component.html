@@ -1,0 +1,10 @@
+<form (ngSubmit)="buscar()" autocomplete="off">
+  <mat-form-field appearance="fill">
+    <input
+      matInput
+      type="text"
+      formControlName="product"
+      class="form-control"
+      (input)="teclaPresionada()"
+  /></mat-form-field>
+</form>
