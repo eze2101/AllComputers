@@ -5,8 +5,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
 
 import { InputProductoComponent } from './components/input-producto/input-producto.component';
-import { ListadoComponent } from './pages/listado/listado.component';
-import { ProductoComponent } from './components/producto/producto.component';
+import { ListadoComponent } from './pages/home/categorias/listado.component';
+import { ProductoComponent } from './pages/producto/producto.component';
 import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { PorCategoriaComponent } from './pages/por-categoria/por-categoria.component';
 import { ProductosRoutingModule } from './productos-routing.module';

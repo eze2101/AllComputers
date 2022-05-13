@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
-import { ProductoComponent } from './components/producto/producto.component';
+import { ProductoComponent } from './pages/producto/producto.component';
 import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ListadoComponent } from './pages/listado/listado.component';
+import { ListadoComponent } from './pages/home/categorias/listado.component';
 import { PorCategoriaComponent } from './pages/por-categoria/por-categoria.component';
+import { HomeAdminComponent } from '../admin/home/home.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,17 @@ const routes: Routes = [
     children: [
       {
         path: ':name',
-        component: PorCategoriaComponent,
+        component: ListadoComponent,
+        children: [
+          {
+            path: '',
+            component: PorCategoriaComponent,
+          },
+          {
+            path: ':id',
+            component: ProductoComponent,
+          },
+        ],
       },
       {
         path: '',

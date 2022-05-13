@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ValidarTokenGuard } from './guards/validar-token.guard';
-
 import { ErrorComponent } from './shared/error/error.component';
 
 const routes: Routes = [
@@ -13,6 +12,13 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () =>
       import('./productos/productos.module').then((m) => m.ProductosModule),
+    canActivate: [ValidarTokenGuard],
+    canLoad: [ValidarTokenGuard],
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
     canActivate: [ValidarTokenGuard],
     canLoad: [ValidarTokenGuard],
   },

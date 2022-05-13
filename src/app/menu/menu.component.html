@@ -19,5 +19,15 @@
       aria-label="Example user verified icon"
       >verified_user</mat-icon
     >
+    <div fxLayout="row">
+      <div *ngFor="let categoria of categorias">
+        <button mat-button routerLink="{{ categoria.name }}">
+          {{ categoria.name }}
+        </button>
+      </div>
+    </div>
+    <!-- <div *ngIf="Usuario()" class="dueño">
+      <button mat-button routerLink="../admin">opciones dueño</button>
+    </div> -->
   </mat-toolbar-row>
 </mat-toolbar>

@@ -7,3 +7,10 @@
   display: flex;
   justify-content: end;
 }
+
+.dueño {
+  display: flex;
+
+  position: absolute;
+  right: 5px;
+}

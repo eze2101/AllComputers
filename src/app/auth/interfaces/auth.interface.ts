@@ -5,10 +5,22 @@ export interface AuthResponse {
   token?: string;
   msg?: string;
   email?: string;
+  carrito?: [
+    {
+      IDproduct: string;
+      unit: number;
+    }
+  ];
 }
 
 export interface Usuario {
-  uid: string;
+  uid?: string;
   name: string;
   email: string;
+  carrito: [
+    {
+      IDproduct: string;
+      unit: number;
+    }
+  ];
 }
