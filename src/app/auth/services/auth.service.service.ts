@@ -20,6 +20,13 @@ export class AuthService {
     return { ...this._usuario };
   }
 
+  get admin() {
+    if (this._usuario.name == 'ezepereyra') {
+      return true;
+    }
+    return false;
+  }
+
   constructor(private http: HttpClient) {}
 
   register(name: string, email: string, password: string) {

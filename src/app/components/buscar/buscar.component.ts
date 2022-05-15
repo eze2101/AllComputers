@@ -33,7 +33,7 @@ export class BuscarComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {
-    if (this.user.name == 'ezepereyra') {
+    if (this.authService.admin) {
       this.url = 'admin';
     }
   }
@@ -62,12 +62,12 @@ export class BuscarComponent implements OnInit {
 
     if (categoria.length == 1) {
       this.termino = categoria[0]!.name;
-      this.router.navigateByUrl(`/${this.url}/${this.termino.trim()}`);
+      this.router.navigateByUrl(`/${this.url}/${this.termino}`);
     } else {
       const producto: Producto = event.option.value;
       this.termino = producto.name;
       this.router.navigateByUrl(
-        `/${this.url}/${producto.categoria?.trim()}/${producto._id}`
+        `/${this.url}/${producto.categoria}/${producto._id}`
       );
     }
   }

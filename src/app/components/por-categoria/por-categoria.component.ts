@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  ParamMap,
-  Params,
-  Router,
-} from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Producto } from '../../client/interfaces/prodcuto.interface';
 import { ProductosService } from '../../client/service/productos.service';
 

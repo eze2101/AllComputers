@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../../client/interfaces/prodcuto.interface';
 import { ProductosService } from '../../client/service/productos.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service.service';
 
 @Component({
   selector: 'app-categorias',
@@ -10,20 +11,30 @@ import { Router } from '@angular/router';
 })
 export class CategoriasComponent implements OnInit {
   categorias!: Categoria[];
+  admin: boolean = false;
+  url!: string;
+
   constructor(
     private productosService: ProductosService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.admin = this.authService.admin;
+  }
 
   ngOnInit(): void {
-    console.log('cargado');
+    this.url = this.router.url;
+
     this.productosService
       .getCategorias()
       .subscribe((categorias) => (this.categorias = categorias));
   }
 
   irA(nombre: string) {
-    let url = this.router.url;
-    this.router.navigateByUrl(`/${url}/${nombre.trim()}`);
+    this.router.navigateByUrl(`/${this.url}/${nombre}`);
+  }
+
+  editar(id: string) {
+    this.router.navigateByUrl(`/${this.url}/editar-categoria/${id}`);
   }
 }

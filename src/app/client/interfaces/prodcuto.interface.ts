@@ -10,5 +10,6 @@ export interface Producto {
 
 export interface Categoria {
   name: string;
-  img: string;
+  img?: string;
+  _id: string;
 }

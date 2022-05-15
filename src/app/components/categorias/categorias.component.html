@@ -6,5 +6,10 @@
         <img src="{{ categoria.img }}" alt="imagen categoria"
       /></mat-card-content>
     </mat-card>
+    <div *ngIf="admin">
+      <button mat-raised-button color="warn" (click)="editar(categoria._id)">
+        Editar Categoria
+      </button>
+    </div>
   </div>
 </div>

@@ -3,12 +3,12 @@ ADMIN
 
 backend:
 L        1- usuario name, propiedad unica
-L       2-crear metodo para editar categorias y productos
+L        2-crear metodo para editar categorias y productos
 L        3- crear metodo para eliminar categorias y productos
 
 
 angular:
-        1- menu ADMIN
+L        1- menu ADMIN
         2- componente de editar categorias
         3- componente de editar productos
 

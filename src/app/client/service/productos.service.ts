@@ -34,18 +34,22 @@ export class ProductosService {
       `${this.baseUrl}/home/productos?product=${termino}&_limit=5`
     );
   }
-  getCategoriasSugeridas(termino: string): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(
-      `${this.baseUrl}/home/categoria?cat=${termino}&_limit=5`
-    );
-  }
+
   getProductoXcategoria(termino: string): Observable<Producto[]> {
     return this.http.get<Producto[]>(
       `${this.baseUrl}/home/productoscategoria?pxc=${termino}`
     );
   }
-
+  getCategoriasSugeridas(termino: string): Observable<Categoria[]> {
+    return this.http.get<Categoria[]>(
+      `${this.baseUrl}/home/categoria?cat=${termino}&_limit=5`
+    );
+  }
   getCategorias(): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(`${this.baseUrl}/home/categorias`);
+  }
+
+  getCategoriaID(id: string): Observable<Categoria> {
+    return this.http.get<Categoria>(`${this.baseUrl}/home/categoria/${id}`);
   }
 }

@@ -12,8 +12,8 @@ import { ComponentsModule } from '../components/components.module';
   declarations: [ListadoComponent, HomeComponent],
   imports: [
     CommonModule,
-    MaterialModule,
     ClientRoutingModule,
+    MaterialModule,
     FormsModule,
     FlexLayoutModule,
     ComponentsModule,
