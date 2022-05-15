@@ -49,7 +49,9 @@ export class ProductosService {
     return this.http.get<Categoria[]>(`${this.baseUrl}/home/categorias`);
   }
 
-  getCategoriaID(id: string): Observable<Categoria> {
-    return this.http.get<Categoria>(`${this.baseUrl}/home/categoria/${id}`);
+  getCategoriaID(id: string) {
+    return new Promise((resolve, reject) => {
+      this.http.get(`${this.baseUrl}/home/categoria/${id}`);
+    });
   }
 }

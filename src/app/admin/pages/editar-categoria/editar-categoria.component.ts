@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ProductosService } from 'src/app/client/service/productos.service';
 import { Categoria } from '../../../client/interfaces/prodcuto.interface';
+import { environment } from '../../../../environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-editar-categoria',
@@ -16,11 +18,13 @@ export class EditarCategoriaComponent implements OnInit {
     name: ``,
     img: ``,
   });
+  private baseUrl = environment.baseUrl;
 
   constructor(
     private productoService: ProductosService,
     private activeRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -28,16 +32,32 @@ export class EditarCategoriaComponent implements OnInit {
       this.id = params.get('id');
       console.log(this.id);
 
-      this.productoService.getCategoriaID(this.id).subscribe((resp) => {
-        console.log(resp), (this.categoria = resp);
-      });
+      this.getCategoriaID(this.id);
 
       console.log(this.categoria);
+    });
+  }
 
-      this.miFormulario = this.fb.group({
-        name: `${this.categoria.name}`,
-        img: `${this.categoria.img}`,
-      });
+  getCategoriaID(id: string) {
+    return new Promise((resolve, reject) => {
+      this.http
+        .get<Categoria>(`${this.baseUrl}/home/categoria/${id}`)
+        .subscribe(
+          (resp) => {
+            this.categoria = resp;
+            console.log(this.categoria);
+
+            this.miFormulario = this.fb.group({
+              name: `${this.categoria.name}`,
+              img: `${this.categoria.img}`,
+            });
+
+            resolve(resp);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
     });
   }
 
