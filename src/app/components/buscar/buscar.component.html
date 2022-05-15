@@ -13,7 +13,10 @@
     (optionSelected)="opcionSeleccionada($event)"
   >
     <mat-optgroup label="hola">
-      <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+      <mat-option
+        *ngFor="let categoria of categoriasSugeridas"
+        [value]="categoria"
+      >
         {{ categoria.name }}</mat-option
       >
       <mat-option *ngFor="let producto of productos" [value]="producto">

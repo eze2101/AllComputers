@@ -1,0 +1,10 @@
+mat-card {
+  height: 200px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+}

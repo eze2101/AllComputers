@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Producto } from '../../interfaces/prodcuto.interface';
-import { ProductosService } from '../../service/productos.service';
+import { Producto } from '../../client/interfaces/prodcuto.interface';
+import { ProductosService } from '../../client/service/productos.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +19,7 @@ export class TarjetaProductoComponent implements OnInit {
   ngOnInit(): void {}
 
   verProducto(producto: Producto) {
-    console.log(producto);
-    this.router.navigateByUrl(`/home/${producto.categoria}/${producto._id}`);
+    let url = this.router.url;
+    this.router.navigateByUrl(`/${url}/${producto._id}`);
   }
 }

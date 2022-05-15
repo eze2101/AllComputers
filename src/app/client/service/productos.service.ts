@@ -45,7 +45,7 @@ export class ProductosService {
     );
   }
 
-  getCaterogrias(): Observable<Categoria[]> {
+  getCategorias(): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(`${this.baseUrl}/home/categorias`);
   }
 }

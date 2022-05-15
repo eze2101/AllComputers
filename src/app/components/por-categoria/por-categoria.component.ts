@@ -6,8 +6,8 @@ import {
   Params,
   Router,
 } from '@angular/router';
-import { Producto } from '../../interfaces/prodcuto.interface';
-import { ProductosService } from '../../service/productos.service';
+import { Producto } from '../../client/interfaces/prodcuto.interface';
+import { ProductosService } from '../../client/service/productos.service';
 
 @Component({
   selector: 'app-por-categoria',
@@ -31,28 +31,14 @@ export class PorCategoriaComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('hola');
-    // this.activeRoute.params.subscribe((params: Params) => {
-    //   this.nombre = params['name'];
-    // });
-
     this.activeRoute.paramMap.subscribe((params: ParamMap) => {
       this.nombre = params.get('name');
     });
-    console.log(this.nombre);
-    // this.productoService.getProductos().subscribe((productos) => {
-    //   this.productos = productos;
-    // });
+
     this.productoService
       .getProductoXcategoria(this.nombre)
       .subscribe((productos) => {
         this.productos = productos;
       });
-
-    // this.productoService.categoriaCompleta$.subscribe((pxc) => {
-    //   (this.prodXcate = pxc), console.log(this.prodXcate);
-    // });
-
-    console.log(this.router.url);
   }
 }

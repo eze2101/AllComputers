@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
-      import('./productos/productos.module').then((m) => m.ProductosModule),
+      import('./client/client.module').then((m) => m.ClientModule),
     canActivate: [ValidarTokenGuard],
     canLoad: [ValidarTokenGuard],
   },

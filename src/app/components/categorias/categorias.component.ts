@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Categoria } from '../../interfaces/prodcuto.interface';
-import { ProductosService } from '../../service/productos.service';
+import { Categoria } from '../../client/interfaces/prodcuto.interface';
+import { ProductosService } from '../../client/service/productos.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,11 +18,12 @@ export class CategoriasComponent implements OnInit {
   ngOnInit(): void {
     console.log('cargado');
     this.productosService
-      .getCaterogrias()
+      .getCategorias()
       .subscribe((categorias) => (this.categorias = categorias));
   }
 
   irA(nombre: string) {
-    this.router.navigateByUrl(`/home/${nombre}`);
+    let url = this.router.url;
+    this.router.navigateByUrl(`/${url}/${nombre.trim()}`);
   }
 }

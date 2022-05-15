@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../auth/interfaces/auth.interface';
-import { AuthService } from '../auth/services/auth.service.service';
-import { ProductosService } from '../productos/service/productos.service';
-import { Categoria } from '../productos/interfaces/prodcuto.interface';
+import { Categoria } from 'src/app/client/interfaces/prodcuto.interface';
+import { ProductosService } from 'src/app/client/service/productos.service';
+import { Usuario } from '../../auth/interfaces/auth.interface';
+import { AuthService } from '../../auth/services/auth.service.service';
 
 @Component({
   selector: 'app-menu',
@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productosService.getCaterogrias().subscribe((categorias) => {
+    this.productosService.getCategorias().subscribe((categorias) => {
       this.categorias = categorias;
       //console.log(this.usuario);
     });
