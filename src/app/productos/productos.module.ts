@@ -11,10 +11,10 @@ import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { PorCategoriaComponent } from './pages/por-categoria/por-categoria.component';
 import { ProductosRoutingModule } from './productos-routing.module';
 import { HomeComponent } from './pages/home/home.component';
-import { MenuComponent } from '../menu/menu.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { FormsModule } from '@angular/forms';
 import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-producto.component';
+import { MenuModule } from '../menu/menu.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,6 @@ import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-
     CategoriasComponent,
     PorCategoriaComponent,
     HomeComponent,
-    MenuComponent,
     BuscarComponent,
     TarjetaProductoComponent,
   ],
@@ -34,6 +33,7 @@ import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-
     ProductosRoutingModule,
     FormsModule,
     FlexLayoutModule,
+    MenuModule,
   ],
 })
 export class ProductosModule {}

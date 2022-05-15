@@ -6,7 +6,6 @@ import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListadoComponent } from './pages/home/categorias/listado.component';
 import { PorCategoriaComponent } from './pages/por-categoria/por-categoria.component';
-import { HomeAdminComponent } from '../admin/home/home.component';
 
 const routes: Routes = [
   {
