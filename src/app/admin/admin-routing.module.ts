@@ -7,7 +7,7 @@ import { CategoriasComponent } from '../components/categorias/categorias.compone
 import { HomeAdminComponent } from './pages/home/home.component';
 import { HomeCategoriaComponent } from './pages/home/home-categoria/home-categoria.component';
 import { CrearEditarCategoriaComponent } from './pages/crear-editar-categoria/crear-editar-categoria.component';
-import { EditarProductoComponent } from './pages/editar-producto/editar-producto.component';
+import { CrearEditarProductoComponent } from './pages/crear-editar-producto/crear-editar-producto.component';
 
 const routes: Routes = [
   {
@@ -19,8 +19,8 @@ const routes: Routes = [
         component: CrearEditarCategoriaComponent,
       },
       {
-        path: 'editar-producto/:name',
-        component: EditarProductoComponent,
+        path: 'crear-editar-producto/:name',
+        component: CrearEditarProductoComponent,
       },
       {
         path: ':name',
@@ -31,7 +31,7 @@ const routes: Routes = [
             component: PorCategoriaComponent,
           },
           {
-            path: ':id',
+            path: ':name',
             component: ProductoComponent,
           },
         ],

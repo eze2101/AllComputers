@@ -3,15 +3,17 @@ export interface Producto {
   price: number;
   description: string;
   stock: number;
-  categoria?: string;
-  _id: string;
+  categoria: string;
+  _id?: string;
   img: string;
+  ok?: boolean;
+  msg?: string;
 }
 
 export interface Categoria {
-  ok?: boolean;
-  msg?: string;
   name: string;
   img: string;
   _id?: string;
+  ok?: boolean;
+  msg?: string;
 }

@@ -22,6 +22,29 @@ export class ProductosService {
 
   constructor(private http: HttpClient) {}
 
+  crearProducto(producto: Producto) {
+    console.log(producto);
+
+    return this.http
+      .post<Producto>(`${this.baseUrl}/home/newProduct`, producto)
+      .pipe(
+        tap(({ ok }) => ok),
+        map((resp) => resp.ok),
+        catchError((err) => of(err.error.msg))
+      );
+  }
+
+  editarProducto(id: string, producto: Producto): Observable<Producto> {
+    return this.http.put<Producto>(
+      `${this.baseUrl}/home/producto/${id}`,
+      producto
+    );
+  }
+
+  eliminarProducto(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/home/producto/${id}`);
+  }
+
   getProductos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.baseUrl}/home/products`);
   }

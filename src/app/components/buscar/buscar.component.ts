@@ -67,7 +67,7 @@ export class BuscarComponent implements OnInit {
       const producto: Producto = event.option.value;
       this.termino = producto.name;
       this.router.navigateByUrl(
-        `/${this.url}/${producto.categoria}/${producto._id}`
+        `/${this.url}/${producto.categoria}/${producto.name}`
       );
     }
   }

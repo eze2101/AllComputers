@@ -10,7 +10,8 @@ import { ProductosService } from '../../client/service/productos.service';
 })
 export class ProductoComponent implements OnInit {
   producto!: Producto;
-  id!: any;
+  id!: string;
+  path!: string;
 
   constructor(
     private productoService: ProductosService,
@@ -22,13 +23,16 @@ export class ProductoComponent implements OnInit {
 
   ngOnInit() {
     this.activeRoute.paramMap.subscribe((params: ParamMap) => {
-      this.id = params.get('id');
+      this.path = params.get('name')!;
     });
-    console.log(this.id);
 
-    this.productoService.getProductoID(this.id).subscribe((producto) => {
-      this.producto = producto;
+    this.productoService.getProductosSugeridos(this.path!).subscribe((resp) => {
+      (this.producto = resp[0]), (this.id = this.producto._id!);
     });
+
+    // this.productoService.getProductoID(this.id).subscribe((producto) => {
+    //   this.producto = producto;
+    // });
   }
   // TODO: asdasd
 

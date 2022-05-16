@@ -40,15 +40,6 @@ export class CrearEditarCategoriaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.activeRoute.paramMap.subscribe((params: ParamMap) => {
-    //   this.id = params.get('id');
-    //   console.log(this.id);
-
-    // this.getCategoriaID(this.id);
-
-    //console.log(this.categoria);
-    //});
-
     this.Editar();
   }
 

@@ -10,5 +10,13 @@
 
   <mat-card-footer>
     <h2>${{ producto.price }}</h2>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="editar(producto.name)"
+      *ngIf="admin"
+    >
+      Editar Producto
+    </button>
   </mat-card-footer>
 </mat-card>

@@ -1,0 +1,48 @@
+<div>
+  <div>
+    <h1>{{ titulo }}</h1>
+    <hr />
+    <form [formGroup]="miFormulario" autocomplete="off">
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          formControlName="name"
+          placeholder="Nombre de la categoria"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input matInput formControlName="price" placeholder="precio" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          formControlName="stock"
+          placeholder="unidades disponibles"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          formControlName="description"
+          placeholder="descripcion"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput formControlName="img" placeholder="Imagen" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput formControlName="categoria" placeholder="categoria" />
+      </mat-form-field>
+    </form>
+    <div *ngIf="!esEditar()">
+      <button mat-button (click)="cancelar()">Cancelar</button>
+      <button mat-button (click)="CrearProducto()">Crear</button>
+    </div>
+    <div *ngIf="esEditar()">
+      <button mat-button (click)="cancelar()">Cancelar</button>
+      <button mat-button (click)="editarProducto()">Guardar</button>
+      <button mat-button (click)="eliminar(producto._id!)">Eliminar</button>
+    </div>
+  </div>
+</div>
