@@ -1,8 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Categoria, Producto } from '../interfaces/prodcuto.interface';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { tap, map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +41,21 @@ export class ProductosService {
       `${this.baseUrl}/home/productoscategoria?pxc=${termino}`
     );
   }
+
+  //CATEGORIA
+
+  crearCategoria(categoria: Categoria) {
+    console.log(categoria);
+
+    return this.http
+      .post<Categoria>(`${this.baseUrl}/home/newCategoria`, categoria)
+      .pipe(
+        tap(({ ok }) => ok),
+        map((resp) => resp.ok),
+        catchError((err) => of(err.error.msg))
+      );
+  }
+
   getCategoriasSugeridas(termino: string): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(
       `${this.baseUrl}/home/categoria?cat=${termino}&_limit=5`
@@ -49,9 +65,18 @@ export class ProductosService {
     return this.http.get<Categoria[]>(`${this.baseUrl}/home/categorias`);
   }
 
-  getCategoriaID(id: string) {
-    return new Promise((resolve, reject) => {
-      this.http.get(`${this.baseUrl}/home/categoria/${id}`);
-    });
+  getCategoriaID(id: string): Observable<Categoria> {
+    return this.http.get<Categoria>(`${this.baseUrl}/home/categoria/${id}`);
+  }
+
+  editarCategoria(id: string, categoria: Categoria): Observable<Categoria> {
+    return this.http.put<Categoria>(
+      `${this.baseUrl}/home/categoria/${id}`,
+      categoria
+    );
+  }
+
+  eliminarCategoria(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/home/categoria/${id}`);
   }
 }

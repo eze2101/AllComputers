@@ -20,6 +20,9 @@
       >verified_user</mat-icon
     >
     <div fxLayout="row">
+      <button mat-button routerLink="crear-editar-categoria/new">
+        crear categoria
+      </button>
       <div *ngFor="let categoria of categorias">
         <button mat-button routerLink="{{ categoria.name }}">
           {{ categoria.name }}

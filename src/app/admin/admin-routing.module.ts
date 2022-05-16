@@ -6,7 +6,7 @@ import { ProductoComponent } from '../components/producto/producto.component';
 import { CategoriasComponent } from '../components/categorias/categorias.component';
 import { HomeAdminComponent } from './pages/home/home.component';
 import { HomeCategoriaComponent } from './pages/home/home-categoria/home-categoria.component';
-import { EditarCategoriaComponent } from './pages/editar-categoria/editar-categoria.component';
+import { CrearEditarCategoriaComponent } from './pages/crear-editar-categoria/crear-editar-categoria.component';
 import { EditarProductoComponent } from './pages/editar-producto/editar-producto.component';
 
 const routes: Routes = [
@@ -15,11 +15,11 @@ const routes: Routes = [
     component: HomeAdminComponent,
     children: [
       {
-        path: 'editar-categoria/:id',
-        component: EditarCategoriaComponent,
+        path: 'crear-editar-categoria/:name',
+        component: CrearEditarCategoriaComponent,
       },
       {
-        path: 'editar-producto/:id',
+        path: 'editar-producto/:name',
         component: EditarProductoComponent,
       },
       {

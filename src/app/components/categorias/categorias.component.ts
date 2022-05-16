@@ -34,7 +34,7 @@ export class CategoriasComponent implements OnInit {
     this.router.navigateByUrl(`/${this.url}/${nombre}`);
   }
 
-  editar(id: string) {
-    this.router.navigateByUrl(`/${this.url}/editar-categoria/${id}`);
+  editar(name: string) {
+    this.router.navigateByUrl(`/${this.url}/crear-editar-categoria/${name}`);
   }
 }

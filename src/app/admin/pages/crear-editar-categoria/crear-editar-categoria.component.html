@@ -1,0 +1,46 @@
+<div>
+  <div>
+    <h1>{{ titulo }}</h1>
+    <hr />
+    <form [formGroup]="miFormulario" autocomplete="off">
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          formControlName="name"
+          placeholder="Nombre de la categoria"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input matInput formControlName="img" placeholder="img" />
+      </mat-form-field>
+    </form>
+    <div *ngIf="!esEditar()">
+      <button mat-button (click)="cancelar()">Cancelar</button>
+      <button mat-button (click)="CrearCategoria()">Crear</button>
+    </div>
+    <div *ngIf="esEditar()">
+      <button mat-button (click)="cancelar()">Cancelar</button>
+      <button mat-button (click)="editarCategoria()">Guardar</button>
+      <button mat-button (click)="eliminar(categoria._id!)">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- <form [formGroup]="miFormulario" (ngSubmit)="guardar()" autocomplete="off">
+  <mat-form-field appearance="fill">
+    <input
+      matInput
+      formControlName="name"
+      placeholder="Nombre de la categoria"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <input matInput formControlName="img" placeholder="img" />
+  </mat-form-field>
+
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-button (click)="guardar()">Guardar</button>
+  <button mat-button (click)="eliminar(categoria._id)">Eliminar</button>
+</form> -->

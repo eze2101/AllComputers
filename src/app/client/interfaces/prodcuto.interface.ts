@@ -9,7 +9,9 @@ export interface Producto {
 }
 
 export interface Categoria {
+  ok?: boolean;
+  msg?: string;
   name: string;
-  img?: string;
-  _id: string;
+  img: string;
+  _id?: string;
 }
