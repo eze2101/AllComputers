@@ -27,21 +27,8 @@ export class CategoriasComponent implements OnInit {
     this.url = this.router.url;
 
     this.productosService.getCategorias().subscribe((categorias) => {
-      (this.categorias = categorias), console.log(this.categorias[0].name);
-
-      this.productosService
-        .getImagen(this.categorias[0].name)
-        .subscribe((resp) => {
-          console.log(resp);
-
-          this.img = resp[0];
-          console.log(this.img);
-        });
+      this.categorias = categorias;
     });
-  }
-
-  irA(nombre: string) {
-    this.router.navigateByUrl(`/${this.url}/${nombre}`);
   }
 
   editar(name: string) {

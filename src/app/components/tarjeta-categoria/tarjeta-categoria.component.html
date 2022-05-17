@@ -1,0 +1,11 @@
+<mat-card (click)="irA(categoria.name)">
+  <mat-card-title>{{ categoria.name }}</mat-card-title>
+  <mat-card-content>
+    <div *ngIf="!img; else divImg">
+      <mat-spinner></mat-spinner>
+    </div>
+    <ng-template #divImg>
+      <img src="{{ img.fileUrl }}" alt="imagen categoria" />
+    </ng-template>
+  </mat-card-content>
+</mat-card>

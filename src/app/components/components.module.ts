@@ -11,6 +11,7 @@ import { PorCategoriaComponent } from './por-categoria/por-categoria.component';
 import { ProductoComponent } from './producto/producto.component';
 import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.component';
 import { SubirImagenComponent } from './subir-imagen/subir-imagen.component';
+import { TarjetaCategoriaComponent } from './tarjeta-categoria/tarjeta-categoria.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SubirImagenComponent } from './subir-imagen/subir-imagen.component';
     ProductoComponent,
     TarjetaProductoComponent,
     SubirImagenComponent,
+    TarjetaCategoriaComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { SubirImagenComponent } from './subir-imagen/subir-imagen.component';
     ProductoComponent,
     TarjetaProductoComponent,
     SubirImagenComponent,
+    TarjetaCategoriaComponent,
   ],
 })
 export class ComponentsModule {}
