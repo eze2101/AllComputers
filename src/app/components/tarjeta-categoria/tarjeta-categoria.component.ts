@@ -19,7 +19,6 @@ export class TarjetaCategoriaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.categoria);
     this.buscarImagen();
   }
 
@@ -28,8 +27,8 @@ export class TarjetaCategoriaComponent implements OnInit {
   }
 
   buscarImagen() {
-    this.productosService.getImagen(this.categoria.name).subscribe((resp) => {
-      this.img = resp[0];
+    this.productosService.getImagen(this.categoria.img).subscribe((resp) => {
+      this.img = resp;
       console.log(this.img);
     });
   }

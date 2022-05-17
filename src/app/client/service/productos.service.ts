@@ -105,8 +105,10 @@ export class ProductosService {
 
   //IMAGENES
 
-  getImagen(nombre: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/dowload?img=${nombre}`);
+  getImagen(id: string): Observable<any> {
+    console.log(id);
+
+    return this.http.get(`${this.baseUrl}/dowload/${id}`);
   }
 
   uploadImagenes(name: string, file: File): Observable<Object> {
@@ -116,4 +118,9 @@ export class ProductosService {
 
     return this.http.post<object>(`${this.baseUrl}/upload`, form);
   }
+
+  /*editarImagenes(id:string, file:File):Observable<any>{
+    return this.http.put(`${this.baseUrl}/upload`, file)
+
+  }*/
 }

@@ -18,13 +18,14 @@ export class CrearEditarCategoriaComponent implements OnInit {
   categoria!: Categoria;
   miFormulario: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(4)]],
-    file: ['', [Validators.required]],
     img: ['', [Validators.required]],
+    file: [null],
   });
   titulo: string = 'Crear Categoria';
   path!: string | null;
   private baseUrl = environment.baseUrl;
   image: any = '../assets/mazo.jpg';
+  imagen: any;
   file: any;
 
   constructor(
@@ -48,9 +49,7 @@ export class CrearEditarCategoriaComponent implements OnInit {
 
   CrearCategoria() {
     const { name, img } = this.miFormulario.value;
-    /*const typeImagen = this.miFormulario.value.file.substring(
-      this.miFormulario.value.file.lastIndexOf('.') + 1
-    );*/
+
     const CATEGORIA: Categoria = {
       name: name,
       img: img,
@@ -89,14 +88,24 @@ export class CrearEditarCategoriaComponent implements OnInit {
       this.productoService
         .getCategoriasSugeridas(this.path!)
         .subscribe((resp) => {
+          (this.categoria = resp[0]),
+            (this.id = this.categoria._id!),
+            this.buscarImagen();
           this.miFormulario.setValue({
             name: resp[0].name,
             img: resp[0].img,
-          }),
-            (this.categoria = resp[0]),
-            (this.id = this.categoria._id!);
+            file: null,
+          });
+          console.log(this.miFormulario.value);
         });
     }
+  }
+  buscarImagen() {
+    this.productoService.getImagen(this.categoria.img).subscribe((resp) => {
+      this.image = resp.fileUrl;
+      this.imagen = resp;
+      console.log(this.imagen);
+    });
   }
 
   editarCategoria() {
@@ -105,12 +114,12 @@ export class CrearEditarCategoriaComponent implements OnInit {
       name: name,
       img: img,
     };
-    console.log(this.categoria);
-    console.log(this.id);
 
     this.productoService
       .editarCategoria(this.id!, CATEGORIAS)
       .subscribe((ok) => {
+        console.log(ok);
+
         if (ok.ok === true) {
           Swal.fire({
             icon: 'success',
@@ -158,15 +167,17 @@ export class CrearEditarCategoriaComponent implements OnInit {
   subir() {
     const form = this.miFormulario;
 
-    console.log(form.value.file);
+    console.log(this.miFormulario.value.file);
 
-    if (form.valid) {
+    if (form.value.file) {
       this.productoService
         .uploadImagenes(form.value.img, this.file)
         .subscribe((data) => {
           this.miFormulario.reset;
         });
       this.image = '../assets/mazo.jpg';
+    } else {
+      console.log('no entro');
     }
   }
 
@@ -187,71 +198,4 @@ export class CrearEditarCategoriaComponent implements OnInit {
       }
     }
   }
-  /*
-  getCategoriaID(id: string) {
-    return new Promise((resolve, reject) => {
-      this.http
-        .get<Categoria>(`${this.baseUrl}/home/categoria/${id}`)
-        .subscribe(
-          (resp) => {
-            this.categoria = resp;
-            console.log(this.categoria);
-
-            this.miFormulario = this.fb.group({
-              name: `${this.categoria.name}`,
-              img: `${this.categoria.img}`,
-            });
-
-            resolve(resp);
-          },
-          (err) => {
-            reject(err);
-          }
-        );
-    });
-  }
-
-  cancelar() {
-    this.router.navigateByUrl('/admin');
-  }
-
-  guardar() {
-    /*const { name, img} = this.miFormulario.value;
-
-    this.productoService.editarCategoria(name, img).subscribe((ok) => {
-      console.log(ok);
-      if (ok === true) {
-        this.router.navigateByUrl('/admin');
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: ok,
-        });
-      }
-    });//
-  }
-
-  eliminar(id: string) {
-    Swal.fire({
-      title: `seguro de eliminar "${this.categoria.name}"`,
-      text: 'No se puede revertir esta acción',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.productoService.eliminarCategoria(id).subscribe((resp) => resp);
-        Swal.fire({
-          title: 'Eliminada!',
-          text: 'Categoria eliminada correctamente.',
-          icon: 'success',
-          timer: 2000,
-        });
-      }
-      this.router.navigateByUrl('/admin');
-    });
-  }*/
 }

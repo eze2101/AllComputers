@@ -13,6 +13,7 @@ export interface Producto {
 export interface Categoria {
   name: string;
   img: string;
+  file?: File;
   _id?: string;
   ok?: boolean;
   msg?: string;
