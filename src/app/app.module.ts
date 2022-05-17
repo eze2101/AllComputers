@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-
+import { FileUploadModule } from 'ng2-file-upload';
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './shared/error/error.component';
 
@@ -14,6 +14,7 @@ import { ErrorComponent } from './shared/error/error.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FileUploadModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

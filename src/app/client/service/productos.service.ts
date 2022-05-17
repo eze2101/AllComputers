@@ -102,4 +102,18 @@ export class ProductosService {
   eliminarCategoria(id: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/home/categoria/${id}`);
   }
+
+  //IMAGENES
+
+  getImagen(nombre: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/dowload?img=${nombre}`);
+  }
+
+  uploadImagenes(name: string, file: File): Observable<Object> {
+    const form = new FormData();
+    form.append('name', name);
+    form.append('file', file, 'form-data');
+
+    return this.http.post<object>(`${this.baseUrl}/upload`, form);
+  }
 }

@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/auth/services/auth.service.service';
 })
 export class CategoriasComponent implements OnInit {
   categorias!: Categoria[];
+  img!: any;
   admin: boolean = false;
   url!: string;
 
@@ -25,9 +26,18 @@ export class CategoriasComponent implements OnInit {
   ngOnInit(): void {
     this.url = this.router.url;
 
-    this.productosService
-      .getCategorias()
-      .subscribe((categorias) => (this.categorias = categorias));
+    this.productosService.getCategorias().subscribe((categorias) => {
+      (this.categorias = categorias), console.log(this.categorias[0].name);
+
+      this.productosService
+        .getImagen(this.categorias[0].name)
+        .subscribe((resp) => {
+          console.log(resp);
+
+          this.img = resp[0];
+          console.log(this.img);
+        });
+    });
   }
 
   irA(nombre: string) {

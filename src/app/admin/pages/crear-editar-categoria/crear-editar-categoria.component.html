@@ -10,14 +10,24 @@
           placeholder="Nombre de la categoria"
         />
       </mat-form-field>
+      <div>
+        <input
+          type="file"
+          placeholder="imagen"
+          (change)="onFileChange($event)"
+          formControlName="file"
+        />
+        <img *ngIf="image" src="{{ image }}" alt="" />
 
-      <mat-form-field appearance="fill">
+        <input type="text" placeholder="Nombre" formControlName="img" />
+      </div>
+      <!-- <mat-form-field appearance="fill">
         <input matInput formControlName="img" placeholder="img" />
-      </mat-form-field>
+      </mat-form-field> -->
     </form>
     <div *ngIf="!esEditar()">
       <button mat-button (click)="cancelar()">Cancelar</button>
-      <button mat-button (click)="CrearCategoria()">Crear</button>
+      <button mat-button (click)="subir(); CrearCategoria()">Crear</button>
     </div>
     <div *ngIf="esEditar()">
       <button mat-button (click)="cancelar()">Cancelar</button>

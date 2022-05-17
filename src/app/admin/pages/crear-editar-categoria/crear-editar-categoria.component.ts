@@ -18,11 +18,14 @@ export class CrearEditarCategoriaComponent implements OnInit {
   categoria!: Categoria;
   miFormulario: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(4)]],
-    img: ``,
+    file: ['', [Validators.required]],
+    img: ['', [Validators.required]],
   });
   titulo: string = 'Crear Categoria';
   path!: string | null;
   private baseUrl = environment.baseUrl;
+  image: any = '../assets/mazo.jpg';
+  file: any;
 
   constructor(
     private productoService: ProductosService,
@@ -45,10 +48,15 @@ export class CrearEditarCategoriaComponent implements OnInit {
 
   CrearCategoria() {
     const { name, img } = this.miFormulario.value;
+    /*const typeImagen = this.miFormulario.value.file.substring(
+      this.miFormulario.value.file.lastIndexOf('.') + 1
+    );*/
     const CATEGORIA: Categoria = {
       name: name,
       img: img,
     };
+
+    console.log(CATEGORIA);
 
     this.productoService.crearCategoria(CATEGORIA).subscribe((ok) => {
       if (ok === true) {
@@ -145,6 +153,39 @@ export class CrearEditarCategoriaComponent implements OnInit {
       }
       this.router.navigateByUrl('/admin');
     });
+  }
+
+  subir() {
+    const form = this.miFormulario;
+
+    console.log(form.value.file);
+
+    if (form.valid) {
+      this.productoService
+        .uploadImagenes(form.value.img, this.file)
+        .subscribe((data) => {
+          this.miFormulario.reset;
+        });
+      this.image = '../assets/mazo.jpg';
+    }
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      if (file.type.includes('image')) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = function load(this: any) {
+          this.image = reader.result;
+        }.bind(this);
+
+        this.file = file;
+      } else {
+        console.log('hubo un error');
+      }
+    }
   }
   /*
   getCategoriaID(id: string) {
