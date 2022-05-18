@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Producto } from '../../client/interfaces/prodcuto.interface';
 import { ProductosService } from '../../client/service/productos.service';
+import { AuthService } from '../../auth/services/auth.service.service';
 
 @Component({
   selector: 'app-producto',
@@ -12,13 +13,16 @@ export class ProductoComponent implements OnInit {
   producto!: Producto;
   id!: string;
   path!: string;
+  admin: boolean = false;
+  img: any;
 
   constructor(
     private productoService: ProductosService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router
   ) {
-    // this.productoService.producto$.subscribe(
-    //   (producto) => (this.producto = producto));
+    this.admin = this.authService.admin;
   }
 
   ngOnInit() {
@@ -27,16 +31,19 @@ export class ProductoComponent implements OnInit {
     });
 
     this.productoService.getProductosSugeridos(this.path!).subscribe((resp) => {
-      (this.producto = resp[0]), (this.id = this.producto._id!);
+      (this.producto = resp[0]),
+        (this.id = this.producto._id!),
+        this.buscarImagen();
     });
-
-    // this.productoService.getProductoID(this.id).subscribe((producto) => {
-    //   this.producto = producto;
-    // });
   }
-  // TODO: asdasd
 
-  // GetProducto(prod: Producto) {
-  //   (this.producto = prod), console.log(this.producto);
-  // }
+  editar(name: string) {
+    this.router.navigateByUrl(`/admin/crear-editar-producto/${name}`);
+  }
+
+  buscarImagen() {
+    this.productoService.getImagen(this.producto.img).subscribe((resp) => {
+      this.img = resp;
+    });
+  }
 }

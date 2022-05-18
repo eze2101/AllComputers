@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-
 import { RouterModule, Routes } from '@angular/router';
+
 import { ProductoComponent } from '../components/producto/producto.component';
 import { CategoriasComponent } from '../components/categorias/categorias.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ListadoComponent } from './pages/home/categorias/listado.component';
 import { PorCategoriaComponent } from '../components/por-categoria/por-categoria.component';
+import { HomeCategoriaComponent } from './pages/home/home-categoria/listado.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
 
 const routes: Routes = [
   {
@@ -13,15 +14,19 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
+        path: 'carrito',
+        component: CarritoComponent,
+      },
+      {
         path: ':name',
-        component: ListadoComponent,
+        component: HomeCategoriaComponent,
         children: [
           {
             path: '',
             component: PorCategoriaComponent,
           },
           {
-            path: ':id',
+            path: ':name',
             component: ProductoComponent,
           },
         ],

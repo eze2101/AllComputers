@@ -1,4 +1,23 @@
+mat-card {
+  margin-top: 15px;
+  height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
 img {
-  width: 150px;
+  width: 200px;
   height: 150px;
+}
+mat-card-title {
+  height: 25%;
+  text-align: center;
+}
+
+mat-card-content {
+  display: flex;
+  height: 50%;
+  margin-bottom: 0;
 }

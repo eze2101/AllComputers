@@ -23,7 +23,7 @@ export class CrearEditarCategoriaComponent implements OnInit {
   });
   titulo: string = 'Crear Categoria';
   path!: string | null;
-  private baseUrl = environment.baseUrl;
+
   image: any = '../assets/mazo.jpg';
   imagen: any;
   file: any;
@@ -32,7 +32,6 @@ export class CrearEditarCategoriaComponent implements OnInit {
     private productoService: ProductosService,
     private activeRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private http: HttpClient,
     private router: Router
   ) {
     this.path = this.activeRoute.snapshot.paramMap.get('name');
@@ -59,6 +58,7 @@ export class CrearEditarCategoriaComponent implements OnInit {
 
     this.productoService.crearCategoria(CATEGORIA).subscribe((ok) => {
       if (ok === true) {
+        this.subir();
         Swal.fire({
           icon: 'success',
           title: 'Categoria creada',
@@ -121,6 +121,7 @@ export class CrearEditarCategoriaComponent implements OnInit {
         console.log(ok);
 
         if (ok.ok === true) {
+          this.subir();
           Swal.fire({
             icon: 'success',
             title: `Categoria ${name} actualizada!`,
@@ -152,7 +153,9 @@ export class CrearEditarCategoriaComponent implements OnInit {
       confirmButtonText: 'Si, eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.productoService.eliminarCategoria(id).subscribe((resp) => resp);
+        this.productoService.eliminarCategoria(id).subscribe((resp) => {
+          resp;
+        });
         Swal.fire({
           title: 'Eliminada!',
           text: 'Categoria eliminada correctamente.',

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './listado.component.html',
   styleUrls: ['./listado.component.css'],
 })
-export class ListadoComponent implements OnInit {
+export class HomeCategoriaComponent implements OnInit {
   productos: Producto[] = [];
   producto!: Producto;
   prodXcate: Producto[] = [];

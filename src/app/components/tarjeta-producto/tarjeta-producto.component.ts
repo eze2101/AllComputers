@@ -13,6 +13,7 @@ export class TarjetaProductoComponent implements OnInit {
   @Input() producto!: Producto;
   admin: boolean = false;
   url: string = this.router.url;
+  img!: any;
 
   constructor(
     private productoService: ProductosService,
@@ -22,7 +23,9 @@ export class TarjetaProductoComponent implements OnInit {
     this.admin = this.authService.admin;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.buscarImagen();
+  }
 
   verProducto(producto: Producto) {
     this.router.navigateByUrl(`/${this.url}/${producto.name}`);
@@ -30,5 +33,14 @@ export class TarjetaProductoComponent implements OnInit {
 
   editar(name: string) {
     this.router.navigateByUrl(`/admin/crear-editar-producto/${name}`);
+  }
+
+  buscarImagen() {
+    console.log(this.producto);
+
+    this.productoService.getImagen(this.producto.img).subscribe((resp) => {
+      this.img = resp;
+      console.log(this.img);
+    });
   }
 }

@@ -27,11 +27,11 @@
     </form>
     <div *ngIf="!esEditar()">
       <button mat-button (click)="cancelar()">Cancelar</button>
-      <button mat-button (click)="subir(); CrearCategoria()">Crear</button>
+      <button mat-button (click)="CrearCategoria()">Crear</button>
     </div>
     <div *ngIf="esEditar()">
       <button mat-button (click)="cancelar()">Cancelar</button>
-      <button mat-button (click)="subir(); editarCategoria()">Guardar</button>
+      <button mat-button (click)="editarCategoria()">Guardar</button>
       <button mat-button (click)="eliminar(categoria._id!)">Eliminar</button>
     </div>
   </div>

@@ -13,7 +13,7 @@ import { Usuario } from '../interfaces/auth.interface';
 export class LoginComponent implements OnInit {
   hide = true;
   miFormulario: FormGroup = this.fb.group({
-    email: ['pereyra@hotmail.com', [Validators.required, Validators.email]],
+    email: ['eze1@hotmail.com', [Validators.required, Validators.email]],
     password: ['123456', [Validators.required, Validators.minLength(6)]],
   });
   admin: string = 'ezepereyra';

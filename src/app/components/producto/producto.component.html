@@ -4,7 +4,7 @@
 </div>
 
 <ng-template #divProducto>
-  <div fxLayout="row" fxLayoutGap="20">
+  <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20">
     <div fxFlex="50">
       <h1>{{ producto.name }}</h1>
       <mat-divider></mat-divider>
@@ -16,12 +16,20 @@
     </div>
 
     <div fxFlex="50">
-      <img
-        src="https://rockcontent.com/es/wp-content/uploads/sites/3/2019/02/pesquisa-de-mercado-1024x538.png"
-        alt="imagen"
-      />
+      <div *ngIf="!img; else divImg">
+        <mat-spinner></mat-spinner>
+      </div>
+      <ng-template #divImg>
+        <img src="{{ img.fileUrl }}" alt="imagen categoria" />
+      </ng-template>
       <h2>Descripcion:</h2>
       <span>{{ producto.description }}</span>
+    </div>
+
+    <div fxFlex="100" fxLayoutAlign="center" *ngIf="admin">
+      <button mat-raised-button color="warn" (click)="editar(producto.name)">
+        Editar Producto
+      </button>
     </div>
   </div>
 </ng-template>

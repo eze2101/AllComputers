@@ -5,7 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosService } from 'src/app/client/service/productos.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
-import { Producto } from '../../../client/interfaces/prodcuto.interface';
+import {
+  Producto,
+  Categoria,
+} from '../../../client/interfaces/prodcuto.interface';
 
 @Component({
   selector: 'app-crear-editar-producto',
@@ -15,23 +18,29 @@ import { Producto } from '../../../client/interfaces/prodcuto.interface';
 export class CrearEditarProductoComponent implements OnInit {
   id!: string;
   producto!: Producto;
+  categorias!: Categoria[];
   miFormulario: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(4)]],
-    price: ['', [Validators.required]],
-    stock: ['', [Validators.required]],
-    description: ['', [Validators.required, Validators.minLength(4)]],
-    categoria: ['', [Validators.required, Validators.minLength(4)]],
+    name: ['perros', [Validators.required, Validators.minLength(4)]],
+    price: [15, [Validators.required]],
+    stock: [20, [Validators.required]],
+    description: [
+      'asdasdasdas',
+      [Validators.required, Validators.minLength(4)],
+    ],
+    categoria: ['teclados', [Validators.required, Validators.minLength(4)]],
     img: ['', [Validators.required]],
+    file: null,
   });
   titulo: string = 'Crear Producto';
   path!: string | null;
-  private baseUrl = environment.baseUrl;
+  image: any = '../assets/mazo.jpg';
+  imagen: any;
+  file: any;
 
   constructor(
     private productoService: ProductosService,
     private activeRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private http: HttpClient,
     private router: Router
   ) {
     this.path = this.activeRoute.snapshot.paramMap.get('name');
@@ -44,6 +53,10 @@ export class CrearEditarProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.Editar();
+
+    this.productoService.getCategorias().subscribe((categorias) => {
+      this.categorias = categorias;
+    });
   }
 
   CrearProducto() {
@@ -57,9 +70,11 @@ export class CrearEditarProductoComponent implements OnInit {
       categoria: categoria,
       img: img,
     };
+    console.log(PRODUCTO);
 
     this.productoService.crearProducto(PRODUCTO).subscribe((ok) => {
       if (ok === true) {
+        this.subir();
         Swal.fire({
           icon: 'success',
           title: 'Producto creado',
@@ -89,6 +104,9 @@ export class CrearEditarProductoComponent implements OnInit {
       this.productoService
         .getProductosSugeridos(this.path!)
         .subscribe((resp) => {
+          (this.producto = resp[0]),
+            (this.id = this.producto._id!),
+            this.buscarImagen();
           this.miFormulario.setValue({
             name: resp[0].name,
             price: resp[0].price,
@@ -96,11 +114,18 @@ export class CrearEditarProductoComponent implements OnInit {
             description: resp[0].description,
             categoria: resp[0].categoria,
             img: resp[0].img,
-          }),
-            (this.producto = resp[0]),
-            (this.id = this.producto._id!);
+            file: null,
+          });
         });
     }
+  }
+
+  buscarImagen() {
+    this.productoService.getImagen(this.producto.img).subscribe((resp) => {
+      this.image = resp.fileUrl;
+      this.imagen = resp;
+      console.log(this.imagen);
+    });
   }
 
   editarProducto() {
@@ -119,6 +144,7 @@ export class CrearEditarProductoComponent implements OnInit {
 
     this.productoService.editarProducto(this.id!, PRODUCTO).subscribe((ok) => {
       if (ok.ok === true) {
+        this.subir();
         Swal.fire({
           icon: 'success',
           title: `Producto ${name} actualizado!`,
@@ -160,5 +186,40 @@ export class CrearEditarProductoComponent implements OnInit {
       }
       this.router.navigateByUrl('/admin');
     });
+  }
+
+  subir() {
+    const form = this.miFormulario;
+
+    console.log(this.miFormulario.value.file);
+
+    if (form.value.file) {
+      this.productoService
+        .uploadImagenes(form.value.img, this.file)
+        .subscribe((data) => {
+          this.miFormulario.reset;
+        });
+      this.image = '../assets/mazo.jpg';
+    } else {
+      console.log('no entro');
+    }
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      if (file.type.includes('image')) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = function load(this: any) {
+          this.image = reader.result;
+        }.bind(this);
+
+        this.file = file;
+      } else {
+        console.log('hubo un error');
+      }
+    }
   }
 }

@@ -4,17 +4,20 @@
     <hr />
     <form [formGroup]="miFormulario" autocomplete="off">
       <mat-form-field appearance="fill">
+        <mat-label>Nombre:</mat-label>
         <input
           matInput
           formControlName="name"
-          placeholder="Nombre de la categoria"
+          placeholder="Nombre del Producto"
         />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
+        <mat-label>Precio:</mat-label>
         <input matInput formControlName="price" placeholder="precio" />
       </mat-form-field>
       <mat-form-field appearance="fill">
+        <mat-label>Unidades disponibles:</mat-label>
         <input
           matInput
           formControlName="stock"
@@ -22,19 +25,47 @@
         />
       </mat-form-field>
       <mat-form-field appearance="fill">
+        <mat-label>Descripción</mat-label>
         <input
           matInput
           formControlName="description"
           placeholder="descripcion"
         />
       </mat-form-field>
+
       <mat-form-field appearance="fill">
-        <input matInput formControlName="img" placeholder="Imagen" />
+        <mat-label>Categoria:</mat-label>
+        <!-- <input matInput formControlName="categoria" placeholder="categoria" /> -->
+        <mat-select formControlName="categoria">
+          <mat-option
+            *ngFor="let categoria of categorias"
+            value="{{ categoria.name }}"
+            >{{ categoria.name }}</mat-option
+          >
+        </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <input matInput formControlName="categoria" placeholder="categoria" />
-      </mat-form-field>
+
+      <div>
+        <input
+          type="file"
+          placeholder="imagen"
+          (change)="onFileChange($event)"
+          formControlName="file"
+        />
+        <img *ngIf="image" src="{{ image }}" alt="" />
+
+        <mat-form-field>
+          <mat-label>ID único</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="EJ: mismo nombre del producto"
+            formControlName="img"
+          />
+        </mat-form-field>
+      </div>
     </form>
+
     <div *ngIf="!esEditar()">
       <button mat-button (click)="cancelar()">Cancelar</button>
       <button mat-button (click)="CrearProducto()">Crear</button>

@@ -13,6 +13,8 @@ import { AuthService } from '../../auth/services/auth.service.service';
 export class MenuComponent implements OnInit {
   usuario: Usuario = this.authService.usuario;
   categorias: Categoria[] = [];
+  admin: boolean = false;
+  url: string = '/home';
 
   constructor(
     private router: Router,
@@ -23,8 +25,8 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.productosService.getCategorias().subscribe((categorias) => {
       this.categorias = categorias;
-      //console.log(this.usuario);
     });
+    this.admin = this.authService.admin;
   }
 
   logOut() {
@@ -32,9 +34,11 @@ export class MenuComponent implements OnInit {
     this.authService.logOut();
   }
 
-  Usuario() {
-    if (this.usuario.name == 'ezepereyra') {
-      return true;
-    } else return false;
+  irA(nombre: string) {
+    if (this.admin) {
+      this.url = '/admin';
+    }
+
+    this.router.navigateByUrl(`/${this.url}/${nombre}`);
   }
 }

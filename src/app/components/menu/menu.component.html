@@ -4,32 +4,56 @@
       <span fxFlex="20">AllComputers</span>
       <app-buscar fxFlex="50"></app-buscar>
       <div fxLayout="row" fxFlex="30" class="btMenuSUp">
+        <button mat-button routerLink="/home/carrito">Carrito</button>
+
         <span>{{ usuario.name }}</span>
+
         <button mat-button (click)="logOut()">Log Out</button>
       </div>
     </div>
   </mat-toolbar-row>
 
   <mat-toolbar-row>
-    <span>Categorias</span>
-    <span class="example-spacer"></span>
-    <mat-icon
-      class="example-icon"
-      aria-hidden="false"
-      aria-label="Example user verified icon"
-      >verified_user</mat-icon
-    >
-    <div fxLayout="row">
-      <button mat-button routerLink="crear-editar-categoria/new">
-        crear categoria
+    <div *ngIf="!admin">
+      <button mat-button routerLink="../home">
+        Categorias<mat-icon
+          class="example-icon"
+          aria-hidden="false"
+          aria-label="Example user verified icon"
+          >verified_user</mat-icon
+        >
       </button>
+    </div>
+
+    <div fxLayout="row">
+      <div *ngIf="admin">
+        <button mat-button routerLink="../admin">
+          Categorias
+          <mat-icon
+            class="example-icon"
+            aria-hidden="false"
+            aria-label="Example user verified icon"
+            >verified_user</mat-icon
+          >
+        </button>
+
+        <button mat-button routerLink="crear-editar-categoria/new">
+          crear categoria
+        </button>
+        <button mat-button routerLink="crear-editar-producto/new">
+          crear Producto
+        </button>
+      </div>
       <div *ngFor="let categoria of categorias">
-        <button mat-button routerLink="{{ categoria.name }}">
+        <button mat-button (click)="irA(categoria.name)">
           {{ categoria.name }}
         </button>
       </div>
     </div>
-    <!-- <div *ngIf="Usuario()" class="dueño">
+    <!-- routerLink="{{ categoria.name }}"
+      
+      
+      <div *ngIf="Usuario()" class="dueño">
       <button mat-button routerLink="../admin">opciones dueño</button>
     </div> -->
   </mat-toolbar-row>

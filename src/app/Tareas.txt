@@ -10,7 +10,7 @@ L        3- crear metodo para eliminar categorias y productos
 angular:
 L        1- menu ADMIN
 L       2- componente de editar categorias
-        3- componente de editar productos
+L       3- componente de editar productos
 
 USUARIO
 
