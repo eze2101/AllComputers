@@ -29,7 +29,6 @@ export class TarjetaCategoriaComponent implements OnInit {
   buscarImagen() {
     this.productosService.getImagen(this.categoria.img).subscribe((resp) => {
       this.img = resp;
-      console.log(this.img);
     });
   }
 }

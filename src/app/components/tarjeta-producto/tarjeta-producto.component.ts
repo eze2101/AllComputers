@@ -36,11 +36,8 @@ export class TarjetaProductoComponent implements OnInit {
   }
 
   buscarImagen() {
-    console.log(this.producto);
-
     this.productoService.getImagen(this.producto.img).subscribe((resp) => {
       this.img = resp;
-      console.log(this.img);
     });
   }
 }

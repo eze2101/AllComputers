@@ -7,8 +7,9 @@ export interface AuthResponse {
   email?: string;
   carrito?: [
     {
-      IDproduct: string;
-      unit: number;
+      IDproducto: string;
+      unidades: number;
+      _id: string;
     }
   ];
 }
@@ -19,8 +20,9 @@ export interface Usuario {
   email: string;
   carrito: [
     {
-      IDproduct: string;
-      unit: number;
+      IDproducto: string;
+      unidades: number;
+      _id: string;
     }
   ];
 }

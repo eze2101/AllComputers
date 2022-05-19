@@ -115,9 +115,8 @@ export class CrearEditarCategoriaComponent implements OnInit {
       img: img,
     };
 
-    this.productoService
-      .editarCategoria(this.id!, CATEGORIAS)
-      .subscribe((ok) => {
+    this.productoService.editarCategoria(this.id!, CATEGORIAS).subscribe(
+      (ok) => {
         console.log(ok);
 
         if (ok.ok === true) {
@@ -135,7 +134,17 @@ export class CrearEditarCategoriaComponent implements OnInit {
             text: ok.msg,
           });
         }
-      });
+      },
+      (error) => {
+        console.log(error);
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.error.msg,
+        });
+      }
+    );
   }
 
   cancelar() {

@@ -4,6 +4,7 @@ import { Categoria, Producto } from '../interfaces/prodcuto.interface';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { tap, map, catchError } from 'rxjs/operators';
+import { Usuario } from '../../auth/interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -106,8 +107,6 @@ export class ProductosService {
   //IMAGENES
 
   getImagen(id: string): Observable<any> {
-    console.log(id);
-
     return this.http.get(`${this.baseUrl}/dowload/${id}`);
   }
 
@@ -123,4 +122,13 @@ export class ProductosService {
     return this.http.put(`${this.baseUrl}/upload`, file)
 
   }*/
+
+  editarCarrito(id: string, usuario: Usuario): Observable<Usuario> {
+    console.log(id, usuario);
+
+    return this.http.put<Usuario>(
+      `${this.baseUrl}/home/carrito/${id}`,
+      usuario
+    );
+  }
 }
