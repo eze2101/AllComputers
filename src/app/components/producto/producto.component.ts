@@ -46,6 +46,7 @@ export class ProductoComponent implements OnInit {
   ) {
     this.admin = this.authService.admin;
     this.usuario = this.authService.usuario;
+    console.log(this.usuario);
   }
 
   ngOnInit() {
@@ -87,7 +88,7 @@ export class ProductoComponent implements OnInit {
     console.log(this.usuario.uid);
 
     this.productoService
-      .editarCarrito(this.usuario.uid!, USUARIO)
+      .agregarACarrito(this.usuario.uid!, USUARIO)
       .subscribe((res) => {
         console.log(res);
       });

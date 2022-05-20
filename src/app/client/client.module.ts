@@ -5,11 +5,12 @@ import { MaterialModule } from '../material/material.module';
 import { HomeCategoriaComponent } from './pages/home/home-categoria/listado.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { HomeComponent } from './pages/home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
+import { CarritoComponent } from './pages/carrito/carrito.component';
 
 @NgModule({
-  declarations: [HomeCategoriaComponent, HomeComponent],
+  declarations: [HomeCategoriaComponent, HomeComponent, CarritoComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
@@ -17,6 +18,7 @@ import { ComponentsModule } from '../components/components.module';
     FormsModule,
     FlexLayoutModule,
     ComponentsModule,
+    ReactiveFormsModule,
   ],
 })
 export class ClientModule {}

@@ -123,11 +123,18 @@ export class ProductosService {
 
   }*/
 
-  editarCarrito(id: string, usuario: Usuario): Observable<Usuario> {
+  agregarACarrito(id: string, usuario: Usuario): Observable<Usuario> {
     console.log(id, usuario);
 
     return this.http.put<Usuario>(
       `${this.baseUrl}/home/carrito/${id}`,
+      usuario
+    );
+  }
+
+  editarUnidadesCarrito(id: any, usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(
+      `${this.baseUrl}/home/carrito/unidades/${id}`,
       usuario
     );
   }
