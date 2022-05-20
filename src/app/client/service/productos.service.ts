@@ -134,7 +134,14 @@ export class ProductosService {
 
   editarUnidadesCarrito(id: any, usuario: Usuario): Observable<Usuario> {
     return this.http.put<Usuario>(
-      `${this.baseUrl}/home/carrito/unidades/${id}`,
+      `${this.baseUrl}/home/carritos/unidades/${id}`,
+      usuario
+    );
+  }
+
+  EliminarDelCarrito(id: any, usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(
+      `${this.baseUrl}/home/carrito/eliminar/${id}`,
       usuario
     );
   }

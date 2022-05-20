@@ -12,10 +12,10 @@
         <mat-card-content>
           <img src="{{ producto.img }}}" alt="" />
 
-          <div *ngIf="!editarHabilitado; else divForm">
+          <div *ngIf="editarr != producto.name; else divForm">
             <span>Unidades: </span>
             <span>{{ usuario.carrito[i].unidades }} </span>
-            <button mat-mini-fab (click)="editar()">Editar</button>
+            <button mat-mini-fab (click)="editar(producto.name)">Editar</button>
             <br />
             <span>Disponibles: {{ producto.stock }}</span>
           </div>
@@ -62,6 +62,9 @@
             >Total: ${{ usuario.carrito[i].unidades * producto.price }}</span
           >
         </mat-card-content>
+        <mat-card-footer>
+          <button mat-button (click)="eliminar(producto._id)">Eliminar</button>
+        </mat-card-footer>
       </mat-card>
     </div>
   </ng-template>

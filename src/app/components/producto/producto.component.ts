@@ -106,7 +106,12 @@ export class ProductoComponent implements OnInit {
       if (result.isConfirmed) {
         this.router.navigateByUrl('/home');
       } else {
-        this.router.navigateByUrl('/home/carrito');
+        //this.router.navigateByUrl('/home/carrito');
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate(['/home/carrito']);
+          });
       }
     });
   }

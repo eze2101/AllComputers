@@ -4,6 +4,7 @@ import { AuthService } from '../../../auth/services/auth.service.service';
 import { Producto } from '../../interfaces/prodcuto.interface';
 import { ProductosService } from '../../service/productos.service';
 import { AbstractControl, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrito',
@@ -15,15 +16,19 @@ export class CarritoComponent implements OnInit {
   usuario!: Usuario;
   productos: Producto[] = [];
   editarHabilitado: boolean = false;
+  editarr: string = '';
 
   constructor(
     private authService: AuthService,
-    private productosService: ProductosService
+    private productosService: ProductosService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.usuario = this.authService.usuario;
+
     this.buscarProductos();
+    console.log(this.usuario);
   }
 
   buscarProductos() {
@@ -36,15 +41,18 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  editar() {
-    this.editarHabilitado = true;
+  editar(name: string) {
+    this.editarr = name;
   }
 
   guardar(id: any) {
+    this.editarr = '';
     let index = this.usuario.carrito.findIndex((el) => el._id == id);
     console.log(this.usuario.carrito[index].unidades);
     const PRODUCTO = this.usuario.carrito[index];
     PRODUCTO.unidades = this.usuario.carrito[index].unidades;
+    console.log(PRODUCTO);
+
     const USUARIO: Usuario = {
       name: this.usuario.name,
       email: this.usuario.email,
@@ -55,6 +63,20 @@ export class CarritoComponent implements OnInit {
 
     this.productosService
       .editarUnidadesCarrito(this.usuario.uid, USUARIO)
+      .subscribe((resp) => console.log(resp));
+  }
+
+  eliminar(id: any) {
+    console.log(id);
+
+    const USUARIO: Usuario = {
+      name: this.usuario.name,
+      email: this.usuario.email,
+      carrito: [{ IDproducto: id!, unidades: 0, _id: id! }],
+    };
+
+    this.productosService
+      .EliminarDelCarrito(this.usuario.uid, USUARIO)
       .subscribe((resp) => console.log(resp));
   }
 }
