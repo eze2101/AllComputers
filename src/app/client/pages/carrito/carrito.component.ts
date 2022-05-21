@@ -3,8 +3,9 @@ import { Usuario } from '../../../auth/interfaces/auth.interface';
 import { AuthService } from '../../../auth/services/auth.service.service';
 import { Producto } from '../../interfaces/prodcuto.interface';
 import { ProductosService } from '../../service/productos.service';
-import { AbstractControl, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carrito',
@@ -26,9 +27,9 @@ export class CarritoComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuario = this.authService.usuario;
+    console.log(this.usuario);
 
     this.buscarProductos();
-    console.log(this.usuario);
   }
 
   buscarProductos() {
@@ -41,42 +42,39 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  editar(name: string) {
-    this.editarr = name;
-  }
-
-  guardar(id: any) {
-    this.editarr = '';
-    let index = this.usuario.carrito.findIndex((el) => el._id == id);
-    console.log(this.usuario.carrito[index].unidades);
-    const PRODUCTO = this.usuario.carrito[index];
-    PRODUCTO.unidades = this.usuario.carrito[index].unidades;
-    console.log(PRODUCTO);
-
-    const USUARIO: Usuario = {
-      name: this.usuario.name,
-      email: this.usuario.email,
-      carrito: [PRODUCTO],
-    };
-
-    this.editarHabilitado = false;
+  comprar() {
+    console.log(this.usuario);
 
     this.productosService
-      .editarUnidadesCarrito(this.usuario.uid, USUARIO)
-      .subscribe((resp) => console.log(resp));
-  }
+      .procesarCompra(this.usuario.uid, this.usuario)
+      .subscribe(
+        (ok) => {
+          console.log(ok);
 
-  eliminar(id: any) {
-    console.log(id);
+          if (ok.ok === true) {
+            this.productosService
+              .agregarCompra(this.usuario.uid, this.usuario)
+              .subscribe((resp) => {
+                console.log(resp);
+                this.productosService
+                  .vaciarCarrito(this.usuario.uid, this.usuario)
+                  .subscribe((resp) => console.log(resp));
+              });
+          }
+          Swal.fire({
+            icon: 'success',
+            text: 'Compra realizada con exito!',
+          });
+        },
+        (error) => {
+          console.log(error);
 
-    const USUARIO: Usuario = {
-      name: this.usuario.name,
-      email: this.usuario.email,
-      carrito: [{ IDproducto: id!, unidades: 0, _id: id! }],
-    };
-
-    this.productosService
-      .EliminarDelCarrito(this.usuario.uid, USUARIO)
-      .subscribe((resp) => console.log(resp));
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.error.msg,
+          });
+        }
+      );
   }
 }

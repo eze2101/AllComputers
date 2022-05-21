@@ -85,34 +85,38 @@ export class ProductoComponent implements OnInit {
         },
       ],
     };
-    console.log(this.usuario.uid);
 
-    this.productoService
-      .agregarACarrito(this.usuario.uid!, USUARIO)
-      .subscribe((res) => {
-        console.log(res);
-      });
-
-    Swal.fire({
-      title: `Agregado al carrito `,
-      text: '¿Quiere seguir comprando?',
-      icon: 'success',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Seguir comprando',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Ir al carrito',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.router.navigateByUrl('/home');
-      } else {
-        //this.router.navigateByUrl('/home/carrito');
-        this.router
-          .navigateByUrl('/', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate(['/home/carrito']);
-          });
+    this.productoService.agregarACarrito(this.usuario.uid!, USUARIO).subscribe(
+      (ok) => {
+        Swal.fire({
+          title: `Agregado al carrito `,
+          text: '¿Quiere seguir comprando?',
+          icon: 'success',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Seguir comprando',
+          cancelButtonColor: '#d33',
+          cancelButtonText: 'Ir al carrito',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigateByUrl('/home');
+          } else {
+            //this.router.navigateByUrl('/home/carrito');
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate(['/home/carrito']);
+              });
+          }
+        });
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.error.msg,
+        });
       }
-    });
+    );
   }
 }

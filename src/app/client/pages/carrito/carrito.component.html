@@ -7,65 +7,9 @@
   </div>
   <ng-template #divProducto>
     <div *ngFor="let producto of productos; index as i">
-      <mat-card>
-        <mat-card-title>{{ producto.name }}</mat-card-title>
-        <mat-card-content>
-          <img src="{{ producto.img }}}" alt="" />
-
-          <div *ngIf="editarr != producto.name; else divForm">
-            <span>Unidades: </span>
-            <span>{{ usuario.carrito[i].unidades }} </span>
-            <button mat-mini-fab (click)="editar(producto.name)">Editar</button>
-            <br />
-            <span>Disponibles: {{ producto.stock }}</span>
-          </div>
-
-          <ng-template #divForm>
-            <span>Unidades: </span>
-
-            <form (ngSubmit)="guardar(producto._id)" #miFormulario="ngForm">
-              <mat-form-field>
-                <input
-                  class="form-control"
-                  matInput
-                  type="number"
-                  name="unidades"
-                  [(ngModel)]="usuario.carrito[i].unidades"
-                  required
-                  max="{{ producto.stock }}"
-                  min="1"
-                /> </mat-form-field
-              ><span class="form-text text-danger" *ngIf="miFormulario.invalid"
-                >Las unidades tienen que ser entre 1 y el stock disponible</span
-              >
-
-              <button
-                mat-mini-fab
-                type="submit"
-                [disabled]="miFormulario.invalid"
-              >
-                Guardar
-              </button>
-            </form>
-
-            <br />
-            <span>Disponibles: {{ producto.stock }}</span>
-          </ng-template>
-
-          <span
-            >Precio: {{ usuario.carrito[i].unidades }} x ${{
-              producto.price
-            }}</span
-          >
-          <br />
-          <span
-            >Total: ${{ usuario.carrito[i].unidades * producto.price }}</span
-          >
-        </mat-card-content>
-        <mat-card-footer>
-          <button mat-button (click)="eliminar(producto._id)">Eliminar</button>
-        </mat-card-footer>
-      </mat-card>
+      <app-tarjeta-carrito [producto]="producto"></app-tarjeta-carrito>
     </div>
   </ng-template>
+
+  <button mat-button (click)="comprar()">Comprar</button>
 </div>

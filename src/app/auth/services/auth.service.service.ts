@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   get admin() {
-    if (this._usuario.name == 'ezepereyra') {
+    if (this._usuario.roll == 'admin') {
       return true;
     }
     return false;
@@ -31,7 +31,8 @@ export class AuthService {
 
   register(name: string, email: string, password: string) {
     const url = `${this.baseUrl}/home/register`;
-    const body = { name, email, password };
+    const roll = 'user';
+    const body = { name, email, password, roll };
 
     return this.http.post<AuthResponse>(url, body).pipe(
       tap(({ ok, token }) => {
@@ -74,6 +75,8 @@ export class AuthService {
           uid: resp.uid!,
           email: resp.email!,
           carrito: resp.carrito!,
+          compras: resp.compras!,
+          roll: resp.roll!,
         };
         return resp.ok;
       }),

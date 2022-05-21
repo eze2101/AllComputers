@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
     email: ['eze1@hotmail.com', [Validators.required, Validators.email]],
     password: ['123456', [Validators.required, Validators.minLength(6)]],
   });
-  admin: string = 'ezepereyra';
 
   constructor(
     private fb: FormBuilder,
@@ -34,8 +33,10 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.miFormulario.value;
 
     this.authService.login(email, password).subscribe((resp) => {
+      console.log(resp);
+
       if (resp.ok === true) {
-        if (resp.name == this.admin) {
+        if (resp.roll == 'admin') {
           this.router.navigateByUrl('/admin');
         } else {
           this.router.navigateByUrl('/home');
