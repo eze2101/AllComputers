@@ -4,6 +4,7 @@ import { AuthService } from '../../auth/services/auth.service.service';
 import { Usuario } from '../../auth/interfaces/auth.interface';
 import { NgForm } from '@angular/forms';
 import { ProductosService } from '../../client/service/productos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tarjeta-carrito',
@@ -22,7 +23,8 @@ export class TarjetaCarritoComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private productosService: ProductosService
+    private productosService: ProductosService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +36,6 @@ export class TarjetaCarritoComponent implements OnInit {
   buscarImagen() {
     this.productosService.getImagen(this.producto.img).subscribe((resp) => {
       this.imagen = resp.fileUrl;
-      console.log(this.imagen);
     });
   }
 
@@ -51,10 +52,9 @@ export class TarjetaCarritoComponent implements OnInit {
   guardar(id: any) {
     this.editarr = '';
     let index = this.usuario.carrito.findIndex((el) => el._id == id);
-    console.log(this.usuario.carrito[index].unidades);
+
     const PRODUCTO = this.usuario.carrito[index];
     PRODUCTO.unidades = this.usuario.carrito[index].unidades;
-    console.log(PRODUCTO);
 
     const USUARIO: Usuario = {
       name: this.usuario.name,
@@ -70,8 +70,6 @@ export class TarjetaCarritoComponent implements OnInit {
   }
 
   eliminar(id: any) {
-    console.log(id);
-
     const USUARIO: Usuario = {
       name: this.usuario.name,
       email: this.usuario.email,
@@ -80,6 +78,11 @@ export class TarjetaCarritoComponent implements OnInit {
 
     this.productosService
       .EliminarDelCarrito(this.usuario.uid, USUARIO)
-      .subscribe((resp) => console.log(resp));
+      .subscribe((resp) => {
+        this.authService
+          .validarToken()
+          .subscribe((resp) => this.productosService.usuario$.emit(id));
+      });
   }
 }
+//;this.router.navigateByUrl('/home/carrito')

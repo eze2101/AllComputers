@@ -4,7 +4,7 @@
       <span fxFlex="20">AllComputers</span>
       <app-buscar fxFlex="50"></app-buscar>
       <div fxLayout="row" fxFlex="30" class="btMenuSUp">
-        <button mat-button (click)="carrito()">Carrito</button>
+        <button mat-button [routerLink]="['/home/carrito']">Carrito</button>
 
         <span>{{ usuario.name }}</span>
 

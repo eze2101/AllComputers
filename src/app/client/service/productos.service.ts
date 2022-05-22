@@ -14,8 +14,9 @@ export class ProductosService {
 
   private _producto!: Producto[];
 
-  producto$ = new EventEmitter<Producto>();
-  categoriaCompleta$ = new EventEmitter<Producto[]>();
+  //
+  recargarPagina$ = new EventEmitter<boolean>();
+  usuario$ = new EventEmitter<any>();
 
   get producto() {
     return { ...this._producto };

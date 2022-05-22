@@ -41,9 +41,22 @@ export class MenuComponent implements OnInit {
 
     this.router.navigateByUrl(`/${this.url}/${nombre}`);
   }
-  carrito() {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+}
+
+/*
+
+ carrito() {
+    this.authService.validarToken().subscribe();
+    this.router.navigateByUrl('/home/carrito');
+  }
+
+
+this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/home/carrito']);
     });
-  }
-}
+
+ this.productosService.recargarPagina$.emit(true)
+this.router.navigateByUrl('/home/carrito');
+
+
+*/

@@ -2,11 +2,11 @@
 <hr />
 <h2>Productos:</h2>
 <div>
-  <div *ngIf="!productos; else divProducto">
+  <div *ngIf="productos.length == 0; else divProducto">
     <h1>Tu carrito esta vacio</h1>
   </div>
   <ng-template #divProducto>
-    <div *ngFor="let producto of productos; index as i">
+    <div *ngFor="let producto of productos">
       <app-tarjeta-carrito [producto]="producto"></app-tarjeta-carrito>
     </div>
   </ng-template>

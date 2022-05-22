@@ -88,6 +88,7 @@ export class ProductoComponent implements OnInit {
 
     this.productoService.agregarACarrito(this.usuario.uid!, USUARIO).subscribe(
       (ok) => {
+        this.authService.validarToken().subscribe((resp) => console.log(resp));
         Swal.fire({
           title: `Agregado al carrito `,
           text: '¿Quiere seguir comprando?',
@@ -101,12 +102,7 @@ export class ProductoComponent implements OnInit {
           if (result.isConfirmed) {
             this.router.navigateByUrl('/home');
           } else {
-            //this.router.navigateByUrl('/home/carrito');
-            this.router
-              .navigateByUrl('/', { skipLocationChange: true })
-              .then(() => {
-                this.router.navigate(['/home/carrito']);
-              });
+            this.router.navigateByUrl('/home/carrito');
           }
         });
       },
@@ -120,3 +116,9 @@ export class ProductoComponent implements OnInit {
     );
   }
 }
+
+/*this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate(['/home/carrito']);
+              });*/
