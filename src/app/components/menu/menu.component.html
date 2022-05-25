@@ -121,17 +121,19 @@
           <app-buscar fxFlex="30"></app-buscar>
           <div fxLayout="row">
             <button mat-button routerLink="crear-editar-categoria/new">
-              crear categoria
+              <mat-icon>add</mat-icon> crear categoria
             </button>
             <button mat-button routerLink="crear-editar-producto/new">
-              crear Producto
+              <mat-icon>add</mat-icon>crear Producto
             </button>
             <div>
               <button mat-button [matMenuTriggerFor]="admin">
-                {{ usuario.name }}
+                <mat-icon>account_circle</mat-icon>{{ usuario.name }}
               </button>
               <mat-menu #admin="matMenu" xPosition="before" fxLayout="column">
-                <button mat-button (click)="logOut()">Log Out</button>
+                <button mat-button (click)="logOut()">
+                  <mat-icon>logout</mat-icon>Log Out
+                </button>
               </mat-menu>
             </div>
           </div>
@@ -157,19 +159,21 @@
     <mat-toolbar>
       <mat-toolbar-row>
         <div fxLayout="row" class="menuSuperior">
-          <span fxFlex="30" class="titulo">All Computers</span>
+          <span class="titulo">All Computers</span>
           <div class="botonUser">
             <button mat-button [matMenuTriggerFor]="menu">
-              {{ usuario.name }}
+              <mat-icon>account_circle</mat-icon>{{ usuario.name }}
             </button>
             <mat-menu #menu="matMenu" xPosition="before" fxLayout="column">
               <button mat-button routerLink="crear-editar-categoria/new">
-                crear categoria
+                <mat-icon>add</mat-icon>crear categoria
               </button>
               <button mat-button routerLink="crear-editar-producto/new">
-                crear Producto
+                <mat-icon>add</mat-icon>crear Producto
               </button>
-              <button mat-button (click)="logOut()">Log Out</button>
+              <button mat-button (click)="logOut()">
+                <mat-icon>logout</mat-icon>Log Out
+              </button>
             </mat-menu>
           </div>
         </div>
@@ -179,7 +183,9 @@
           <button mat-button routerLink="../admin">Categorias</button>
 
           <div>
-            <button mat-button [matMenuTriggerFor]="categoriass">ver</button>
+            <button mat-icon-button [matMenuTriggerFor]="categoriass">
+              <mat-icon>menu</mat-icon>
+            </button>
             <mat-menu
               #categoriass="matMenu"
               xPosition="before"
