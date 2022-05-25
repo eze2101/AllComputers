@@ -12,15 +12,22 @@ import { AuthService } from '../services/auth.service.service';
 export class RegisterComponent {
   hide = true;
   miFormulario: FormGroup = this.fb.group({
-    name: ['eze1', [Validators.required, Validators.minLength(4)]],
-    email: ['eze1@hotmail.com', [Validators.required, Validators.email]],
-    password: ['123456', [Validators.required, Validators.minLength(6)]],
+    name: [null, [Validators.required, Validators.minLength(4)]],
+    email: [null, [Validators.required, Validators.email]],
+    password: [null, [Validators.required, Validators.minLength(6)]],
   });
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
   ) {}
+
+  campoValido(campo: string) {
+    return (
+      this.miFormulario.controls[campo].errors &&
+      this.miFormulario.controls[campo].touched
+    );
+  }
 
   registro() {
     console.log(this.miFormulario.value);
@@ -36,6 +43,8 @@ export class RegisterComponent {
           icon: 'error',
           title: 'Oops...',
           text: ok,
+          confirmButtonColor: '#3c00bb',
+          color: 'black',
         });
       }
     });

@@ -84,10 +84,6 @@ export class AuthService {
     );
   }
 
-  verUsuario(id: string): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.baseUrl}/home/user/${id}`);
-  }
-
   logOut() {
     localStorage.clear();
   }

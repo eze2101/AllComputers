@@ -28,6 +28,7 @@ export class CategoriasComponent implements OnInit {
 
     this.productosService.getCategorias().subscribe((categorias) => {
       this.categorias = categorias;
+      //TODO arreglar recarga
     });
   }
 

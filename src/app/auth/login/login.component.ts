@@ -29,6 +29,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  campoValido(campo: string) {
+    return (
+      this.miFormulario.controls[campo].errors &&
+      this.miFormulario.controls[campo].touched
+    );
+  }
+
   login() {
     const { email, password } = this.miFormulario.value;
 
@@ -43,9 +50,11 @@ export class LoginComponent implements OnInit {
         }
       } else {
         Swal.fire({
+          color: 'black',
           icon: 'error',
           title: 'Oops...',
-          text: resp.ok,
+          confirmButtonColor: '#3c00bb',
+          text: 'El correo o la contraseña son incorrectas',
         });
       }
     });

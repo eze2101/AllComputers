@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [],
@@ -26,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDividerModule,
     MatCardModule,
     MatSelectModule,
+    MatMenuModule,
   ],
 })
 export class MaterialModule {}

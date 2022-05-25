@@ -24,8 +24,7 @@ export class CarritoComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private productosService: ProductosService,
-    private router: Router,
-    private ref: ChangeDetectorRef
+    private router: Router
   ) {}
 
   ngOnInit(): void {

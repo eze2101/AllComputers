@@ -3,3 +3,70 @@ form {
   flex-direction: column;
   align-items: stretch;
 }
+.titulo {
+  font-family: "Signika Negative", sans-serif;
+  font-size: 35px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.login {
+  background-color: #6016fd;
+  color: white;
+  margin-bottom: 7px;
+  font-size: 20px;
+  border-radius: 15px !important;
+}
+
+.login:hover {
+  background-color: #3c00bb;
+}
+.registro {
+  background-color: #002060;
+  border-radius: 20px;
+}
+
+.link {
+  font-family: "Signika Negative", sans-serif;
+  color: #8e59ff;
+}
+.link:hover {
+  color: #ba97ff;
+}
+
+.error {
+  color: #af0000;
+  font-weight: 400;
+}
+h4 {
+  font-size: 25px;
+  font-family: "Signika Negative", sans-serif;
+  margin: 5px 0px;
+}
+mat-form-field {
+  display: contents;
+}
+::ng-deep .mat-form-field-appearance-fill.background .mat-form-field-flex {
+  background-color: rgba(255, 255, 255, 60%) !important;
+  color: black;
+}
+
+/* Alertas */
+
+::ng-deep .swal2-html-container {
+  font-size: 25px !important;
+  font-weight: 600 !important;
+}
+
+::ng-deep .swal2-icon.swal2-error {
+  border-color: red !important;
+}
+
+::ng-deep .swal2-icon.swal2-error [class^="swal2-x-mark-line"] {
+  background-color: red !important;
+}
+
+.mat-raised-button.mat-button-disabled.mat-button-disabled {
+  background-color: #5200ffb5 !important;
+  color: #ffffff87;
+}

@@ -1,4 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+  /* TODO cambiar imagen a Local */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  background-image: url("https://fondosmil.com/fondo/12586.jpg");
+}
+body {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif !important;
+}

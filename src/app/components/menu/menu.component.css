@@ -1,5 +1,6 @@
 .menuSuperior {
   align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -8,9 +9,98 @@
   justify-content: end;
 }
 
-.dueño {
+.titulo {
   display: flex;
+  justify-content: center;
+  font-size: 35px;
+  font-weight: bold;
+  padding-left: 10px;
+}
 
-  position: absolute;
-  right: 5px;
+.user {
+  font-size: 25px;
+}
+
+.botonUser {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.categ {
+  padding: 0 10px;
+}
+
+::ng-deep span.mat-button-wrapper {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.mat-icon {
+  color: #c59aff;
+  margin-right: 5px;
+}
+.mat-icon-button {
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::ng-deep .mat-menu-panel {
+  background-color: #5200ff !important;
+  color: white;
+}
+
+::ng-deep .cdk-overlay-connected-position-bounding-box {
+  position: relative;
+}
+
+::ng-deep .mat-menu-panel button {
+  width: 100%;
+}
+
+.mat-toolbar {
+  background-color: #3c00bb;
+  color: white;
+}
+
+.mat-toolbar {
+  font-family: "Cormorant Garamond", serif !important;
+}
+.mat-button {
+  font-family: "Cormorant Garamond", serif !important;
+  font-size: 25px;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.mat-button:hover {
+  border-radius: 5px;
+  background: rgb(95 24 245);
+  box-shadow: 1px 1px 8px rgb(0 0 0);
+  /* 
+  */
+}
+
+/*  animation: pulsate 1s ease-in-out;
+@keyframes pulsate {
+  0% {
+    box-shadow: 0 0 10px rgb(189, 18, 189), 0 0 20px rgb(142, 16, 180);
+  }
+}
+ */
+
+.mat-form-field {
+  display: contents;
+}
+
+::ng-deep .mat-menu-content {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+::ng-deep .mat-toolbar-row {
+  padding: 0px !important;
 }

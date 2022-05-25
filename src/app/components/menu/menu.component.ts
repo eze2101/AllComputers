@@ -4,6 +4,7 @@ import { Categoria } from 'src/app/client/interfaces/prodcuto.interface';
 import { ProductosService } from 'src/app/client/service/productos.service';
 import { Usuario } from '../../auth/interfaces/auth.interface';
 import { AuthService } from '../../auth/services/auth.service.service';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-menu',
@@ -15,11 +16,13 @@ export class MenuComponent implements OnInit {
   categorias: Categoria[] = [];
   admin: boolean = false;
   url: string = '/home';
+  menuComprimido: boolean = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private productosService: ProductosService
+    private productosService: ProductosService,
+    public breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit(): void {
@@ -27,8 +30,23 @@ export class MenuComponent implements OnInit {
       this.categorias = categorias;
     });
     this.admin = this.authService.admin;
+
+    this.breakpointObserver
+      .observe(['(min-width: 900px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.menuComprimido = false;
+        } else {
+          this.menuComprimido = true;
+        }
+      });
   }
 
+  /*
+if (this.breakpointObserver.isMatched('(min-width: 900px)')) {
+      console.log('pantalla con un minimo de 900px');
+    }
+  */
   logOut() {
     this.router.navigateByUrl('/auth');
     this.authService.logOut();

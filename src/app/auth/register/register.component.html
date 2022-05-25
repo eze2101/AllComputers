@@ -1,36 +1,66 @@
 <form [formGroup]="miFormulario" (ngSubmit)="registro()" autocomplete="">
-  <mat-form-field appearance="fill">
-    <input matInput formControlName="name" placeholder="Usuario" />
-  </mat-form-field>
+  <div>
+    <h2 fxLayoutAlign="center center" class="titulo">Registro</h2>
 
-  <mat-form-field appearance="fill">
-    <input matInput formControlName="email" placeholder="Email" />
-  </mat-form-field>
+    <h4>Usuario:</h4>
 
-  <mat-form-field appearance="fill">
-    <input
-      matInput
-      [type]="hide ? 'password' : 'text'"
-      formControlName="password"
-      placeholder="Contraseña"
-    />
-    <button
-      type="button"
-      mat-icon-button
-      matSuffix
-      (click)="hide = !hide"
-      [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hide"
-    >
-      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-    </button>
-  </mat-form-field>
+    <mat-form-field appearance="fill" class="background">
+      <input matInput formControlName="name" placeholder="Usuario" />
+      <span class="error" *ngIf="campoValido('name')"
+        >* Mínimo 4 caracteres</span
+      >
+    </mat-form-field>
 
-  <button mat-raised-button color="primary">Registrarse</button>
+    <h4>Email:</h4>
 
-  <div class="flex-col-c p-t-60">
-    <span> ¿Ya tienes cuenta? </span>
+    <mat-form-field appearance="fill" class="background">
+      <input
+        matInput
+        formControlName="email"
+        placeholder="Email"
+        type="email"
+      />
+      <span class="error" *ngIf="campoValido('email')"
+        >* Este campo es obligatorio</span
+      >
+    </mat-form-field>
 
-    <a routerLink="/auth"> ingresa aquí</a>
+    <h4>Contraseña:</h4>
+
+    <mat-form-field appearance="fill" class="background">
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+        placeholder="Contraseña"
+      />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <span class="error" *ngIf="campoValido('password')"
+        >* Mínimo 6 caracteres</span
+      >
+    </mat-form-field>
+  </div>
+  <button
+    mat-raised-button
+    class="registro"
+    type="submit"
+    [disabled]="miFormulario.invalid"
+  >
+    Registrarse
+  </button>
+
+  <div class="login" fxLayoutAlign="space-evenly center">
+    <span> ¿Ya tienes una cuenta? </span>
+
+    <a routerLink="/auth" class="link"> ingresa aquí</a>
   </div>
 </form>
