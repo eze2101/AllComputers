@@ -1,0 +1,24 @@
+<div fxLayout="column" class="container">
+  <h1 fxLayoutAlign="center">Compras</h1>
+  <mat-divider></mat-divider>
+
+  <div fxLayout="column">
+    <div *ngIf="compras.length == 0; else divCompra">
+      <h1>No tienes compras realizadas</h1>
+    </div>
+    <ng-template #divCompra>
+      <div *ngFor="let compra of compras">
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Fecha: {{ compra.fecha }} </mat-panel-title>
+            <mat-panel-description>
+              {{ compra.compra.length }} productos comprados | {{}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>This is the primary content of the panel.</p>
+        </mat-expansion-panel>
+        <mat-divider></mat-divider>
+      </div>
+    </ng-template>
+  </div>
+</div>

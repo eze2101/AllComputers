@@ -20,11 +20,14 @@ export class CarritoComponent implements OnInit {
   editarHabilitado: boolean = false;
   editarr: string = '';
   index!: number;
+  total: number[] = [];
+  priceTotal: number = 0;
 
   constructor(
     private authService: AuthService,
     private productosService: ProductosService,
-    private router: Router
+    private router: Router,
+    private cdref: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +38,9 @@ export class CarritoComponent implements OnInit {
       (this.usuario = this.authService.usuario),
         (this.index = this.productos.findIndex((el) => el._id == id)),
         this.productos.splice(this.index, 1);
+      this.total.splice(this.index, 1);
       console.log(this.usuario, this.productos);
+      this.sumarPrecios();
     });
 
     this.usuario = this.authService.usuario;
@@ -88,5 +93,19 @@ export class CarritoComponent implements OnInit {
           });
         }
       );
+  }
+
+  precioTotal(precio: any) {
+    this.total[precio.index] = precio.precio;
+    this.sumarPrecios();
+  }
+
+  sumarPrecios() {
+    this.priceTotal = this.total.reduce(
+      (acc: number, value: number) => acc + value,
+      0
+    );
+
+    this.cdref.detectChanges();
   }
 }

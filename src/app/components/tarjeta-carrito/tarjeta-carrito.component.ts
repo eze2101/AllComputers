@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Producto } from '../../client/interfaces/prodcuto.interface';
 import { AuthService } from '../../auth/services/auth.service.service';
 import { Usuario } from '../../auth/interfaces/auth.interface';
@@ -14,6 +21,8 @@ import { Router } from '@angular/router';
 export class TarjetaCarritoComponent implements OnInit {
   @ViewChild('miFormulario') miFormulario!: NgForm;
   @Input() producto!: Producto;
+  @Input() posicion!: number;
+  @Output() price: EventEmitter<any> = new EventEmitter<any>();
 
   usuario!: Usuario;
   editarHabilitado: boolean = false;
@@ -31,6 +40,7 @@ export class TarjetaCarritoComponent implements OnInit {
     this.usuario = this.authService.usuario;
     this.buscarImagen();
     this.buscarEnCarrito();
+    this.verPrecio();
   }
 
   buscarImagen() {
@@ -55,6 +65,8 @@ export class TarjetaCarritoComponent implements OnInit {
 
     const PRODUCTO = this.usuario.carrito[index];
     PRODUCTO.unidades = this.usuario.carrito[index].unidades;
+
+    this.verPrecio();
 
     const USUARIO: Usuario = {
       name: this.usuario.name,
@@ -84,5 +96,13 @@ export class TarjetaCarritoComponent implements OnInit {
           .subscribe((resp) => this.productosService.usuario$.emit(id));
       });
   }
+
+  verPrecio() {
+    let precio = {
+      precio: this.producto.price * this.usuario.carrito[this.index].unidades,
+      index: this.posicion,
+    };
+    console.log(precio);
+    this.price.emit(precio);
+  }
 }
-//;this.router.navigateByUrl('/home/carrito')

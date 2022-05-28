@@ -1,14 +1,16 @@
-<div fxLayout="row wrap" fxLayoutGap="15">
-  <div fxFlex="30" *ngFor="let categoria of categorias">
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="categorias">
+  <div
+    fxFlex="15"
+    fxFlex.md="20"
+    fxFlex.sm="30"
+    fxFlex.xs="40"
+    *ngFor="let categoria of categorias"
+    class="categoria"
+  >
     <app-tarjeta-categoria
       [categoria]="categoria"
       [url]="url"
     ></app-tarjeta-categoria>
-    <div *ngIf="admin">
-      <button mat-raised-button color="warn" (click)="editar(categoria.name)">
-        Editar Categoria
-      </button>
-    </div>
   </div>
 </div>
 

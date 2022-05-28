@@ -31,8 +31,4 @@ export class CategoriasComponent implements OnInit {
       //TODO arreglar recarga
     });
   }
-
-  editar(name: string) {
-    this.router.navigateByUrl(`/${this.url}/crear-editar-categoria/${name}`);
-  }
 }

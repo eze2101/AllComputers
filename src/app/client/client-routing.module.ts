@@ -7,6 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { PorCategoriaComponent } from '../components/por-categoria/por-categoria.component';
 import { HomeCategoriaComponent } from './pages/home/home-categoria/listado.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
+import { ComprasComponent } from './pages/compras/compras.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'carrito',
         component: CarritoComponent,
+      },
+      {
+        path: 'compras',
+        component: ComprasComponent,
       },
       {
         path: ':name',

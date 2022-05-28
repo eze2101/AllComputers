@@ -1,326 +1,114 @@
-<!-- es usuario -->
-<div *ngIf="!admin; else divAdmin">
-  <!-- es usuario y menu no comprimido -->
-  <div
-    fxLayout="row"
-    class="btMenuSUp"
-    *ngIf="!menuComprimido; else MenuComprido"
-  >
-    <mat-toolbar>
-      <mat-toolbar-row>
-        <div fxLayout="row" class="menuSuperior">
-          <span fxFlex="30" class="titulo">All Computers</span>
-          <app-buscar fxFlex="30"></app-buscar>
-          <div fxLayout="row">
-            <button mat-button [routerLink]="['/home/carrito']">
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div fxLayout="row" class="menuSuperior">
+      <span fxFlex="30" class="titulo">All Computers</span>
+      <app-buscar fxFlex="30" *ngIf="!menuComprimido"></app-buscar>
+      <div fxLayout="row" *ngIf="!menuComprimido; else MenuComprimido">
+        <button mat-button *ngIf="!admin" [routerLink]="['/home/carrito']">
+          <mat-icon>shopping_cart</mat-icon>
+          Carrito
+        </button>
+        <button mat-button *ngIf="!admin" [routerLink]="['/home/compras']">
+          <mat-icon>local_mall</mat-icon>
+          Compras
+        </button>
+        <button
+          mat-button
+          *ngIf="admin"
+          routerLink="crear-editar-categoria/new"
+        >
+          <mat-icon>add</mat-icon> crear categoria
+        </button>
+        <button mat-button *ngIf="admin" routerLink="crear-editar-producto/new">
+          <mat-icon>add</mat-icon>crear Producto
+        </button>
+        <button mat-button [matMenuTriggerFor]="menus">
+          <mat-icon>account_circle</mat-icon>
+          {{ usuario.name }}
+        </button>
+        <mat-menu #menus="matMenu" xPosition="before" fxLayout="column">
+          <button mat-button (click)="logOut()">
+            <mat-icon>logout</mat-icon>Log Out
+          </button>
+        </mat-menu>
+      </div>
+      <ng-template #MenuComprimido>
+        <div class="botonUser">
+          <button mat-button [matMenuTriggerFor]="user">
+            <mat-icon>account_circle</mat-icon>
+            {{ usuario.name }}
+          </button>
+          <mat-menu #user="matMenu" xPosition="before" fxLayout="column">
+            <button mat-button *ngIf="!admin" [routerLink]="['/home/carrito']">
               <mat-icon>shopping_cart</mat-icon>
               Carrito
             </button>
 
-            <button mat-button [routerLink]="['/home/carrito']">
+            <button mat-button *ngIf="!admin" [routerLink]="['/home/compras']">
               <mat-icon>local_mall</mat-icon>
               Compras
             </button>
-
-            <button mat-button [matMenuTriggerFor]="menus">
-              <mat-icon>account_circle</mat-icon>
-              {{ usuario.name }}
-            </button>
-            <mat-menu #menus="matMenu" xPosition="before" fxLayout="column">
-              <button mat-button (click)="logOut()">
-                <mat-icon>logout</mat-icon>Log Out
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-      </mat-toolbar-row>
-      <mat-toolbar-row>
-        <div>
-          <button mat-button routerLink="../home">Categorias</button>
-        </div>
-
-        <div *ngFor="let categoria of categorias">
-          <button mat-button (click)="irA(categoria.name)">
-            {{ categoria.name | titlecase }}
-          </button>
-        </div>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  </div>
-
-  <!-- es usuario y menu comprimido -->
-  <ng-template #MenuComprido class="botonUser">
-    <mat-toolbar>
-      <mat-toolbar-row>
-        <div fxLayout="row" class="menuSuperior">
-          <span class="titulo">All Computers</span>
-
-          <div class="botonUser">
-            <button mat-button [matMenuTriggerFor]="user">
-              <mat-icon>account_circle</mat-icon>
-              {{ usuario.name }}
-            </button>
-            <mat-menu #user="matMenu" xPosition="before" fxLayout="column">
-              <button mat-button [routerLink]="['/home/carrito']">
-                <mat-icon>shopping_cart</mat-icon>
-                Carrito
-              </button>
-
-              <button mat-button [routerLink]="['/home/carrito']">
-                <mat-icon>local_mall</mat-icon>
-                Compras
-              </button>
-
-              <button mat-button (click)="logOut()">
-                <mat-icon>logout</mat-icon>Log Out
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-      </mat-toolbar-row>
-      <mat-toolbar-row fxLayoutAlign="space-between center">
-        <div fxLayout="row">
-          <button mat-button routerLink="../home" class="categ">
-            Categorias
-          </button>
-
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="categoria">
-              <mat-icon>menu</mat-icon>
-            </button>
-            <mat-menu #categoria="matMenu" xPosition="before" fxLayout="column">
-              <div *ngFor="let categoria of categorias">
-                <button mat-button (click)="irA(categoria.name)">
-                  {{ categoria.name | titlecase }}
-                </button>
-              </div>
-            </mat-menu>
-          </div>
-        </div>
-        <div>
-          <app-buscar></app-buscar>
-        </div>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  </ng-template>
-</div>
-
-<!-- es Admin -->
-
-<ng-template #divAdmin>
-  <!-- admin y menu no comprimido -->
-  <div
-    fxLayout="row"
-    class="btMenuSUp"
-    *ngIf="!menuComprimido; else MenuComprido"
-  >
-    <mat-toolbar>
-      <mat-toolbar-row>
-        <div fxLayout="row" class="menuSuperior">
-          <span fxFlex="30" class="titulo">All Computers</span>
-          <app-buscar fxFlex="30"></app-buscar>
-          <div fxLayout="row">
-            <button mat-button routerLink="crear-editar-categoria/new">
+            <button
+              mat-button
+              *ngIf="admin"
+              routerLink="crear-editar-categoria/new"
+            >
               <mat-icon>add</mat-icon> crear categoria
             </button>
-            <button mat-button routerLink="crear-editar-producto/new">
+            <button
+              mat-button
+              *ngIf="admin"
+              routerLink="crear-editar-producto/new"
+            >
               <mat-icon>add</mat-icon>crear Producto
             </button>
-            <div>
-              <button mat-button [matMenuTriggerFor]="admin">
-                <mat-icon>account_circle</mat-icon>{{ usuario.name }}
-              </button>
-              <mat-menu #admin="matMenu" xPosition="before" fxLayout="column">
-                <button mat-button (click)="logOut()">
-                  <mat-icon>logout</mat-icon>Log Out
-                </button>
-              </mat-menu>
-            </div>
-          </div>
-        </div>
-      </mat-toolbar-row>
-      <mat-toolbar-row>
-        <div>
-          <button mat-button routerLink="../home">Categorias</button>
-        </div>
 
-        <div *ngFor="let categoria of categorias">
-          <button mat-button (click)="irA(categoria.name)">
-            {{ categoria.name | titlecase }}
-          </button>
-        </div>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  </div>
-
-  <!-- es admin y menu comprimido -->
-
-  <ng-template #MenuComprido class="botonUser">
-    <mat-toolbar>
-      <mat-toolbar-row>
-        <div fxLayout="row" class="menuSuperior">
-          <span class="titulo">All Computers</span>
-          <div class="botonUser">
-            <button mat-button [matMenuTriggerFor]="menu">
-              <mat-icon>account_circle</mat-icon>{{ usuario.name }}
+            <button mat-button (click)="logOut()">
+              <mat-icon>logout</mat-icon>Log Out
             </button>
-            <mat-menu #menu="matMenu" xPosition="before" fxLayout="column">
-              <button mat-button routerLink="crear-editar-categoria/new">
-                <mat-icon>add</mat-icon>crear categoria
-              </button>
-              <button mat-button routerLink="crear-editar-producto/new">
-                <mat-icon>add</mat-icon>crear Producto
-              </button>
-              <button mat-button (click)="logOut()">
-                <mat-icon>logout</mat-icon>Log Out
-              </button>
-            </mat-menu>
-          </div>
+          </mat-menu>
         </div>
-      </mat-toolbar-row>
-      <mat-toolbar-row fxLayoutAlign="space-between center">
-        <div fxLayout="row">
-          <button mat-button routerLink="../admin">Categorias</button>
-
-          <div>
-            <button mat-icon-button [matMenuTriggerFor]="categoriass">
-              <mat-icon>menu</mat-icon>
-            </button>
-            <mat-menu
-              #categoriass="matMenu"
-              xPosition="before"
-              fxLayout="column"
-            >
-              <div *ngFor="let categoria of categorias">
-                <button mat-button (click)="irA(categoria.name)">
-                  {{ categoria.name | titlecase }}
-                </button>
-              </div>
-            </mat-menu>
-          </div>
-        </div>
-        <div>
-          <app-buscar></app-buscar>
-        </div>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  </ng-template>
-</ng-template>
-
-<!-- <div fxLayout="row" class="menuSuperior">
-      <span fxFlex="30" class="titulo">All Computers</span>
-      <app-buscar fxFlex="30"></app-buscar>
-      <div class="botonUser">
-        <button mat-button [matMenuTriggerFor]="menu">
-          {{ usuario.name }}
-        </button>
-        <mat-menu #menu="matMenu" xPosition="before" fxLayout="column">
-          <button mat-button [routerLink]="['/home/carrito']">Carrito</button>
-          <button mat-button [routerLink]="['/home/carrito']">Compras</button>
-          <button mat-button (click)="logOut()">Log Out</button>
-        </mat-menu>
-      </div>
-    </div>
-
-   
-
-
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <div fxLayout="row" class="menuSuperior">
-      <span fxFlex="30" class="titulo">All Computers</span>
-      <app-buscar fxFlex="30"></app-buscar>
-      <div *ngIf="!admin; else divAdmin" fxFlex="40">
-        <div
-          fxLayout="row"
-          class="btMenuSUp"
-          *ngIf="!menuComprimido; else MenuComprido"
-        >
-          <div>
-            <button mat-button [routerLink]="['/home/carrito']">Carrito</button>
-          </div>
-          <div>
-            <button mat-button [routerLink]="['/home/carrito']">Compras</button>
-          </div>
-          <div>
-            <button mat-button [matMenuTriggerFor]="menus">
-              {{ usuario.name }}
-            </button>
-            <mat-menu #menus="matMenu" xPosition="before" fxLayout="column">
-              <button mat-button (click)="logOut()">Log Out</button>
-            </mat-menu>
-          </div>
-        </div>
-
-        <ng-template #MenuComprido class="botonUser">
-          <div class="botonUser">
-            <button mat-button [matMenuTriggerFor]="menu">
-              {{ usuario.name }}
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before" fxLayout="column">
-              <button mat-button [routerLink]="['/home/carrito']">
-                Carrito
-              </button>
-              <button mat-button [routerLink]="['/home/carrito']">
-                Compras
-              </button>
-              <button mat-button (click)="logOut()">Log Out</button>
-            </mat-menu>
-          </div>
-        </ng-template>
-      </div>
-
-      <ng-template #divAdmin>
-        <div *ngIf="!menuComprimido; else MenuComprido">
-          <button mat-button routerLink="crear-editar-categoria/new">
-            crear categoria
-          </button>
-          <button mat-button routerLink="crear-editar-producto/new">
-            crear Producto
-          </button>
-          <button mat-button (click)="logOut()">Log Out</button>
-        </div>
-
-        <ng-template #MenuComprido>
-          <div class="botonUser">
-            <button mat-button [matMenuTriggerFor]="menu">
-              {{ usuario.name }}
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before" fxLayout="column">
-              <button mat-button routerLink="crear-editar-categoria/new">
-                crear categoria
-              </button>
-              <button mat-button routerLink="crear-editar-producto/new">
-                crear Producto
-              </button>
-              <button mat-button (click)="logOut()">Log Out</button>
-            </mat-menu>
-          </div>
-        </ng-template>
       </ng-template>
     </div>
   </mat-toolbar-row>
-
   <mat-toolbar-row>
-    <div *ngIf="!admin">
-      <button mat-button routerLink="../home">Categorias</button>
-    </div>
-
-    <div fxLayout="row">
-      <div *ngIf="admin">
-        <button mat-button routerLink="../admin">Categorias</button>
+    <div *ngIf="!menuComprimido; else menuComprido" fxLayout="row">
+      <div>
+        <button mat-button [routerLink]="admin ? '/admin' : '/home'">
+          Categorias
+        </button>
       </div>
+
       <div *ngFor="let categoria of categorias">
         <button mat-button (click)="irA(categoria.name)">
           {{ categoria.name | titlecase }}
         </button>
       </div>
     </div>
-    routerLink="{{ categoria.name }}"
-      
-      
-      <div *ngIf="Usuario()" class="dueño">
-      <button mat-button routerLink="../admin">opciones dueño</button>
-    </div> 
+    <ng-template #menuComprido>
+      <div fxLayout="row">
+        <button
+          mat-button
+          [routerLink]="admin ? '/admin' : '/home'"
+          class="categ"
+        >
+          Categorias
+        </button>
+
+        <div>
+          <button mat-icon-button [matMenuTriggerFor]="categ">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <mat-menu #categ="matMenu" xPosition="before" fxLayout="column">
+            <div *ngFor="let categoria of categorias">
+              <button mat-button (click)="irA(categoria.name)">
+                {{ categoria.name | titlecase }}
+              </button>
+            </div>
+          </mat-menu>
+        </div>
+      </div>
+      <div><app-buscar></app-buscar></div>
+    </ng-template>
   </mat-toolbar-row>
-</mat-toolbar> -->
+</mat-toolbar>

@@ -22,6 +22,7 @@ export interface AuthResponse {
           _id: string;
         }
       ];
+      fecha: string;
     }
   ];
 }
@@ -47,6 +48,18 @@ export interface Usuario {
           _id: string;
         }
       ];
+      fecha: string;
     }
   ];
+}
+
+export interface Compra {
+  compra: [
+    {
+      IDproducto: string;
+      unidades: number;
+      _id: string;
+    }
+  ];
+  fecha: string;
 }

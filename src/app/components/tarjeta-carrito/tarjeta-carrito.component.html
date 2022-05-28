@@ -1,58 +1,92 @@
 <mat-card>
-  <mat-card-title>{{ producto.name }}</mat-card-title>
-  <mat-card-content>
-    <div *ngIf="!imagen; else divImg">
-      <mat-spinner></mat-spinner>
+  <div fxFlex="100" fxLayout="row wrap">
+    <div fxFlex="30" fxFlex.xs="100">
+      <div *ngIf="!imagen; else divImg">
+        <mat-spinner></mat-spinner>
+      </div>
+      <ng-template #divImg>
+        <img src="{{ imagen }}" alt="" />
+      </ng-template>
     </div>
-    <ng-template #divImg>
-      <img src="{{ imagen }}" alt="" />
-    </ng-template>
+    <div fxFlex="70" fxFlex.xs="100" class="container" fxLayout="row wrap">
+      <h1 fxFlex="100">{{ producto.name }}</h1>
+      <div
+        *ngIf="editarr != producto.name; else divForm"
+        fxFlex="50"
+        fxFlex.xs="100"
+      >
+        <h2>
+          Unidades:
+          <h5>{{ usuario.carrito[index].unidades }}</h5>
+          <button mat-mini-fab (click)="editar(producto.name)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </h2>
 
-    <div *ngIf="editarr != producto.name; else divForm">
-      <span>Unidades: </span>
-      <span>{{ usuario.carrito[index].unidades }} </span>
-      <button mat-mini-fab (click)="editar(producto.name)">Editar</button>
-      <br />
-      <span>Disponibles: {{ producto.stock }}</span>
-    </div>
+        <h4>
+          Disponibles:
+          <h5>{{ producto.stock }}</h5>
+        </h4>
+      </div>
 
-    <ng-template #divForm>
-      <span>Unidades: </span>
+      <ng-template #divForm>
+        <div fxFlex="50" fxFlex.xs="100">
+          <div fxLayout="row wrap">
+            <h2>Unidades:</h2>
+            <form (ngSubmit)="guardar(producto._id)" #miFormulario="ngForm">
+              <mat-form-field>
+                <input
+                  class="form-control"
+                  matInput
+                  type="number"
+                  name="unidades"
+                  [(ngModel)]="usuario.carrito[index].unidades"
+                  required
+                  max="{{ producto.stock }}"
+                  min="1"
+                />
+              </mat-form-field>
 
-      <form (ngSubmit)="guardar(producto._id)" #miFormulario="ngForm">
-        <mat-form-field>
-          <input
-            class="form-control"
-            matInput
-            type="number"
-            name="unidades"
-            [(ngModel)]="usuario.carrito[index].unidades"
-            required
-            max="{{ producto.stock }}"
-            min="1"
-          /> </mat-form-field
-        ><span class="form-text text-danger" *ngIf="miFormulario.invalid"
-          >Las unidades tienen que ser entre 1 y el stock disponible</span
-        >
+              <button
+                mat-mini-fab
+                type="submit"
+                [disabled]="miFormulario.invalid"
+              >
+                <mat-icon>done</mat-icon>
+              </button>
+            </form>
+            <span class="error" *ngIf="miFormulario.invalid" fxFlex="100">
+              * Las unidades tienen que ser entre 1 y el stock disponible
+            </span>
+          </div>
 
-        <button mat-mini-fab type="submit" [disabled]="miFormulario.invalid">
-          Guardar
+          <h4>
+            Disponibles:h5
+            <h5>{{ producto.stock }}</h5>
+          </h4>
+        </div>
+      </ng-template>
+      <div fxFlex="50" fxFlex.xs="100">
+        <h2>
+          Precio:
+          <h5>
+            {{ usuario.carrito[index].unidades }} x
+            {{ producto.price | currency }}
+          </h5>
+        </h2>
+
+        <h2>
+          Total:
+          <h5>
+            {{ usuario.carrito[index].unidades * producto.price | currency }}
+          </h5>
+        </h2>
+      </div>
+      <div fxFlex="100">
+        <button mat-button (click)="eliminar(producto._id)" class="eliminar">
+          Eliminar
         </button>
-      </form>
-
-      <br />
-      <span>Disponibles: {{ producto.stock }}</span>
-    </ng-template>
-
-    <span
-      >Precio: {{ usuario.carrito[index].unidades }} x ${{
-        producto.price
-      }}</span
-    >
-    <br />
-    <span>Total: ${{ usuario.carrito[index].unidades * producto.price }}</span>
-  </mat-card-content>
-  <mat-card-footer>
-    <button mat-button (click)="eliminar(producto._id)">Eliminar</button>
-  </mat-card-footer>
+      </div>
+    </div>
+  </div>
 </mat-card>

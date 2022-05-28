@@ -1,4 +1,35 @@
+.container {
+  background-color: white;
+  margin: 15px;
+  border-radius: 10px;
+}
+
+.comprar {
+  margin-top: 10px;
+  background-color: #6016fd;
+  color: white;
+}
+
 img {
   width: 150px;
   height: 150px;
+}
+
+mat-divider {
+  width: 100%;
+}
+h2 {
+  margin-block: 0px;
+  margin: 10px;
+  padding-right: 10%;
+}
+
+h5 {
+  display: flex;
+  align-items: flex-end;
+  margin-block: 0px;
+  margin-left: 10px;
+  font-size: 20px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }

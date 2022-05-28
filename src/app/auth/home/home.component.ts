@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   }
 
   buscarImagen() {
-    this.productosService.getImagen('home').subscribe((resp) => {
+    this.productosService.getImagen('logo').subscribe((resp) => {
       this.img = resp;
     });
   }

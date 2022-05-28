@@ -17,12 +17,15 @@ export class ProductosService {
   //
   recargarPagina$ = new EventEmitter<boolean>();
   usuario$ = new EventEmitter<any>();
+  precioTotal$ = new EventEmitter<number>();
 
   get producto() {
     return { ...this._producto };
   }
 
   constructor(private http: HttpClient) {}
+
+  precioTotal() {}
 
   crearProducto(producto: Producto) {
     console.log(producto);

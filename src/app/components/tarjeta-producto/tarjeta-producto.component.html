@@ -1,6 +1,6 @@
 <mat-card (click)="verProducto(producto)">
   <mat-card-title>{{ producto.name }}</mat-card-title>
-
+  <mat-divider></mat-divider>
   <mat-card-content>
     <div *ngIf="!img; else divImg">
       <mat-spinner></mat-spinner>
@@ -10,15 +10,15 @@
     </ng-template>
   </mat-card-content>
 
-  <mat-card-footer>
+  <mat-card-footer fxLayout="column">
     <h2>${{ producto.price }}</h2>
-    <button
-      mat-raised-button
-      color="warn"
-      (click)="editar(producto.name)"
-      *ngIf="admin"
-    >
-      Editar Producto
-    </button>
   </mat-card-footer>
 </mat-card>
+<button
+  mat-raised-button
+  color="warn"
+  (click)="editar(producto.name)"
+  *ngIf="admin"
+>
+  Editar Producto
+</button>

@@ -4,45 +4,82 @@
 </div>
 
 <ng-template #divProducto>
-  <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20">
-    <div fxFlex="50">
-      <h1>{{ producto.name }}</h1>
-      <mat-divider></mat-divider>
-      <h4>categoria: {{ producto.categoria }}</h4>
-      <hr />
-      <h2>Precio: ${{ producto.price }}</h2>
-      <hr />
-      <h3>stock: {{ producto.stock }}</h3>
-    </div>
-
-    <div fxFlex="50">
-      <div *ngIf="!img; else divImg">
-        <mat-spinner></mat-spinner>
+  <div fxLayoutAlign="center center">
+    <div fxLayout="row wrap" fxFlex="90" class="container">
+      <div fxFlex="65" fxLayout="column" fxFlex.xs="100" class="imagen">
+        <div *ngIf="!img; else divImg">
+          <mat-spinner></mat-spinner>
+        </div>
+        <ng-template #divImg>
+          <img src="{{ img.fileUrl }}" alt="imagen categoria" />
+        </ng-template>
+        <div fxFlex="100" fxLayout="column" fxLayoutAlign="center flex-start">
+          <h3>Descripcion:</h3>
+          <span
+            >{{ producto.description }} Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Explicabo mollitia possimus dolorem. Sapiente
+            accusamus quo dignissimos saepe quia neque animi corporis culpa, ut
+            fuga atque aspernatur, sit dolores soluta facilis!</span
+          >
+        </div>
       </div>
-      <ng-template #divImg>
-        <img src="{{ img.fileUrl }}" alt="imagen categoria" />
-      </ng-template>
-      <h2>Descripcion:</h2>
-      <span>{{ producto.description }}</span>
-    </div>
 
-    <div fxFlex="100" fxLayoutAlign="center" *ngIf="admin">
-      <button mat-raised-button color="warn" (click)="editar(producto.name)">
-        Editar Producto
-      </button>
+      <div
+        fxFlex="30"
+        fxFlex.xs="100"
+        fxLayout="column"
+        fxLayoutAlign="none center"
+        class="container2"
+      >
+        <div fxLayout="column" class="datos">
+          <h1>{{ producto.name }}</h1>
+          <mat-divider></mat-divider>
+        </div>
+        <div class="container3">
+          <h2>{{ producto.price | currency }}</h2>
+          <span>Unidades disponibles: {{ producto.stock }}</span>
+        </div>
+
+        <div fxLayoutAlign="center" *ngIf="admin">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="editar(producto.name)"
+          >
+            Editar Producto
+          </button>
+        </div>
+
+        <form [formGroup]="miFormulario" autocomplete="off">
+          <div
+            fxLayout="row wrap"
+            fxLayoutAlign="center center"
+            class="unidades"
+          >
+            <!-- <label fxFlex.xs="50"> </label> -->
+            <mat-label>Cantidad: </mat-label>
+            <mat-form-field appearance="fill" class="form">
+              <input
+                matInput
+                type="number"
+                formControlName="unidades"
+                class="input"
+                placeholder="0"
+              />
+            </mat-form-field>
+
+            <button
+              fxFlex="70"
+              mat-button
+              (click)="comprar()"
+              [disabled]="miFormulario.invalid"
+              class="comprar"
+            >
+              Comprar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </ng-template>
-
-<div>
-  <form [formGroup]="miFormulario" autocomplete="off">
-    <label>Cantidad de uniades: </label>
-    <mat-form-field appearance="standard">
-      <input matInput type="number" formControlName="unidades" />
-    </mat-form-field>
-
-    <button mat-button (click)="comprar()" [disabled]="miFormulario.invalid">
-      Comprar
-    </button>
-  </form>
-</div>

@@ -1,0 +1,12 @@
+.categoria {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.productos {
+  height: 250px;
+  margin: 10px;
+  margin-bottom: 40px;
+}

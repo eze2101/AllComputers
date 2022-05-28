@@ -31,7 +31,7 @@
   padding: 0 10px;
 }
 
-::ng-deep span.mat-button-wrapper {
+:host ::ng-deep span.mat-button-wrapper {
   display: flex !important;
   align-items: center !important;
 }
@@ -41,10 +41,12 @@
   margin-right: 5px;
 }
 .mat-icon-button {
-  margin: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.mat-icon-button .mat-icon {
+  margin: 0px;
 }
 
 ::ng-deep .mat-menu-panel {
@@ -52,10 +54,15 @@
   color: white;
 }
 
+::ng-deep .mat-menu-panel span.mat-button-wrapper {
+  display: flex !important;
+  align-items: center !important;
+}
+/*
 ::ng-deep .cdk-overlay-connected-position-bounding-box {
   position: relative;
 }
-
+*/
 ::ng-deep .mat-menu-panel button {
   width: 100%;
 }
@@ -83,6 +90,10 @@
   /* 
   */
 }
+.mat-icon-button:hover {
+  background: rgb(95 24 245);
+  box-shadow: 1px 1px 8px rgb(0 0 0);
+}
 
 /*  animation: pulsate 1s ease-in-out;
 @keyframes pulsate {
@@ -103,4 +114,5 @@
 
 ::ng-deep .mat-toolbar-row {
   padding: 0px !important;
+  justify-content: space-between;
 }

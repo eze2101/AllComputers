@@ -12,6 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -28,6 +29,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatCardModule,
     MatSelectModule,
     MatMenuModule,
+    MatExpansionModule,
   ],
 })
 export class MaterialModule {}

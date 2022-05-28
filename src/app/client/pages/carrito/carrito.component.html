@@ -1,15 +1,28 @@
-<h1>Carrito</h1>
-<hr />
-<h2>Productos:</h2>
-<div>
-  <div *ngIf="productos.length == 0; else divProducto">
-    <h1>Tu carrito esta vacio</h1>
-  </div>
-  <ng-template #divProducto>
-    <div *ngFor="let producto of productos">
-      <app-tarjeta-carrito [producto]="producto"></app-tarjeta-carrito>
-    </div>
-  </ng-template>
+<div fxLayout="column" class="container">
+  <h1 fxLayoutAlign="center">Carrito</h1>
+  <mat-divider></mat-divider>
 
-  <button mat-button (click)="comprar()">Comprar</button>
+  <div fxLayout="column">
+    <div *ngIf="productos.length == 0; else divProducto">
+      <h1>Tu carrito esta vacio</h1>
+    </div>
+    <ng-template #divProducto>
+      <div *ngFor="let producto of productos; index as i">
+        <app-tarjeta-carrito
+          [producto]="producto"
+          [posicion]="i"
+          (price)="precioTotal($event)"
+        ></app-tarjeta-carrito>
+        <mat-divider></mat-divider>
+      </div>
+
+      <h2 fxLayout="row" fxLayoutAlign="center center">
+        Total:
+        <h5>
+          {{ priceTotal | currency }}
+        </h5>
+      </h2>
+      <button mat-button (click)="comprar()" class="comprar">Comprar</button>
+    </ng-template>
+  </div>
 </div>

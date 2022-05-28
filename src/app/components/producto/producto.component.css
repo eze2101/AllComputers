@@ -1,4 +1,121 @@
+.container {
+  background-color: white;
+  margin: 15px;
+  border-radius: 10px;
+}
+
+.container2 {
+  border: 1px solid rgba(0, 0, 0, 0.767);
+  border-radius: 5px;
+  margin: 10px;
+  padding-bottom: 10px;
+  max-height: 400px;
+}
+
+.container3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.imagen {
+  max-height: 1000px;
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+}
 img {
-  width: 100px;
-  height: 100px;
+  width: 50%;
+  height: 100%;
+  max-height: 500px;
+}
+@media (max-width: 600px) {
+  img {
+    width: 80%;
+    height: 95%;
+  }
+}
+
+.datos {
+  display: flex;
+  align-items: center;
+}
+
+.unidades {
+  margin-top: 15px;
+}
+
+mat-label {
+  font-size: 25px;
+  font-weight: 600;
+}
+span {
+  font-size: 20px;
+}
+
+.form {
+  max-width: 20%;
+}
+.input {
+  padding-left: 5px;
+}
+h1 {
+  display: flex !important;
+  margin-block-start: 20px !important;
+  margin-block-end: 20px !important;
+}
+
+:host ::ng-deep h2,
+h3 {
+  font-size: 25px;
+  display: flex !important;
+  margin-block-start: 10px !important;
+  margin-block-end: 10px !important;
+}
+:host h2 {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.mat-divider-horizontal {
+  width: 100%;
+  border-color: black;
+  border-top-width: 1px;
+}
+
+.comprar {
+  background-color: #6016fd;
+  color: white;
+  border-radius: 40px;
+  margin-top: 15px;
+}
+
+.mat-button.mat-button-disabled.mat-button-disabled {
+  background-color: #5200ffb5 !important;
+  color: #ffffff87;
+}
+
+mat-form-field {
+  margin-left: 5px;
+
+  border-radius: 6px;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0px;
+}
+
+:host ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 5px;
+}
+:host ::ng-deep .mat-form-field-infix {
+  padding: 0px;
+  border-top: 0px;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+  bottom: 0px;
 }

@@ -8,9 +8,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
 import { CarritoComponent } from './pages/carrito/carrito.component';
+import { ComprasComponent } from './pages/compras/compras.component';
 
 @NgModule({
-  declarations: [HomeCategoriaComponent, HomeComponent, CarritoComponent],
+  declarations: [HomeCategoriaComponent, HomeComponent, CarritoComponent, ComprasComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,

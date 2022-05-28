@@ -46,23 +46,26 @@ h4 {
 mat-form-field {
   display: contents;
 }
-::ng-deep .mat-form-field-appearance-fill.background .mat-form-field-flex {
+:host
+  ::ng-deep
+  .mat-form-field-appearance-fill.background
+  .mat-form-field-flex {
   background-color: rgba(255, 255, 255, 60%) !important;
   color: black;
 }
 
 /* Alertas */
 
-::ng-deep .swal2-html-container {
+:host ::ng-deep .swal2-html-container {
   font-size: 25px !important;
   font-weight: 600 !important;
 }
 
-::ng-deep .swal2-icon.swal2-error {
+:host ::ng-deep .swal2-icon.swal2-error {
   border-color: red !important;
 }
 
-::ng-deep .swal2-icon.swal2-error [class^="swal2-x-mark-line"] {
+:host ::ng-deep .swal2-icon.swal2-error [class^="swal2-x-mark-line"] {
   background-color: red !important;
 }
 

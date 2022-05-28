@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Producto } from '../../client/interfaces/prodcuto.interface';
 import { ProductosService } from '../../client/service/productos.service';
+import { AuthService } from '../../auth/services/auth.service.service';
 
 @Component({
   selector: 'app-por-categoria',
@@ -13,15 +14,21 @@ export class PorCategoriaComponent implements OnInit {
   producto!: Producto;
   prodXcate: Producto[] = [];
   nombre!: any;
+  admin: boolean = false;
+  url!: string;
 
   constructor(
     private productoService: ProductosService,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private authService: AuthService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
+
+    this.admin = this.authService.admin;
+    this.url = this.router.url;
   }
 
   ngOnInit() {
@@ -34,5 +41,9 @@ export class PorCategoriaComponent implements OnInit {
       .subscribe((productos) => {
         this.productos = productos;
       });
+  }
+
+  editar(name: string) {
+    this.router.navigateByUrl(`/${this.url}/crear-editar-producto/${name}`);
   }
 }
