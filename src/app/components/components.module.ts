@@ -13,6 +13,7 @@ import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.co
 import { SubirImagenComponent } from './subir-imagen/subir-imagen.component';
 import { TarjetaCategoriaComponent } from './tarjeta-categoria/tarjeta-categoria.component';
 import { TarjetaCarritoComponent } from './tarjeta-carrito/tarjeta-carrito.component';
+import { TarjetaComprasComponent } from './tarjeta-compras/tarjeta-compras.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TarjetaCarritoComponent } from './tarjeta-carrito/tarjeta-carrito.compo
     SubirImagenComponent,
     TarjetaCategoriaComponent,
     TarjetaCarritoComponent,
+    TarjetaComprasComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { TarjetaCarritoComponent } from './tarjeta-carrito/tarjeta-carrito.compo
     SubirImagenComponent,
     TarjetaCategoriaComponent,
     TarjetaCarritoComponent,
+    TarjetaComprasComponent,
   ],
 })
 export class ComponentsModule {}

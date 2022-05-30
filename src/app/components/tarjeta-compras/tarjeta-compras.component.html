@@ -1,0 +1,23 @@
+<div *ngIf="!producto; else divPro">
+  <mat-spinner></mat-spinner>
+</div>
+
+<ng-template #divPro>
+  <mat-card fxLayout="row" class="producto" fxFlex="100">
+    <h4 fxFlex="30">{{ producto.name }}</h4>
+    <a
+      fxFlex="20"
+      [routerLink]="['/home/${producto.categoria}/${producto.name}']"
+      >Ver Producto
+    </a>
+
+    <span fxFlex="50">
+      {{ ID.unidades | i18nPlural: ProductoMapa }} |
+      {{ producto.price * ID.unidades | currency }}
+    </span>
+  </mat-card>
+</ng-template>
+
+<!-- this.router.navigateByUrl(
+        `/${this.url}/${producto.categoria}/${producto.name}`
+      ); -->

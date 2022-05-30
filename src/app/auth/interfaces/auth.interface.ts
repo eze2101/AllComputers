@@ -23,6 +23,7 @@ export interface AuthResponse {
         }
       ];
       fecha: string;
+      precio: number;
     }
   ];
 }
@@ -32,6 +33,7 @@ export interface Usuario {
   name: string;
   email: string;
   roll?: string;
+  precio?: number;
   carrito: [
     {
       IDproducto: string;
@@ -49,6 +51,7 @@ export interface Usuario {
         }
       ];
       fecha: string;
+      precio: number;
     }
   ];
 }
@@ -56,10 +59,11 @@ export interface Usuario {
 export interface Compra {
   compra: [
     {
-      IDproducto: string;
-      unidades: number;
-      _id: string;
+      IDproducto?: string;
+      unidades?: number;
+      _id?: string;
     }
   ];
-  fecha: string;
+  fecha?: string;
+  precio?: number;
 }

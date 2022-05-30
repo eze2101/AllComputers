@@ -22,6 +22,7 @@ export class CarritoComponent implements OnInit {
   index!: number;
   total: number[] = [];
   priceTotal: number = 0;
+  //id:string =
 
   constructor(
     private authService: AuthService,
@@ -31,23 +32,18 @@ export class CarritoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.productos);
-    console.log(this.productos == []);
-
     this.productosService.usuario$.subscribe((id) => {
       (this.usuario = this.authService.usuario),
         (this.index = this.productos.findIndex((el) => el._id == id)),
         this.productos.splice(this.index, 1);
       this.total.splice(this.index, 1);
-      console.log(this.usuario, this.productos);
+
       this.sumarPrecios();
     });
 
     this.usuario = this.authService.usuario;
-    console.log(this.usuario);
-
+    // this.usuario = this.authService.verUsuario(this.id);
     this.buscarProductos();
-    console.log(this.productos);
   }
 
   buscarProductos() {
@@ -61,8 +57,6 @@ export class CarritoComponent implements OnInit {
   }
 
   comprar() {
-    console.log(this.usuario);
-
     this.productosService
       .procesarCompra(this.usuario.uid, this.usuario)
       .subscribe(
@@ -70,14 +64,21 @@ export class CarritoComponent implements OnInit {
           console.log(ok);
 
           if (ok.ok === true) {
+            this.usuario.precio = this.priceTotal;
             this.productosService
               .agregarCompra(this.usuario.uid, this.usuario)
               .subscribe((resp) => {
+                this.authService
+                  .validarToken()
+                  .subscribe((resp) => console.log(resp));
                 this.productosService
                   .vaciarCarrito(this.usuario.uid, this.usuario)
-                  .subscribe();
+                  .subscribe((resp) =>
+                    this.router.navigateByUrl(`/home/compras`)
+                  );
               });
           }
+
           Swal.fire({
             icon: 'success',
             text: 'Compra realizada con exito!',

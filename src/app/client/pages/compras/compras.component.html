@@ -2,20 +2,32 @@
   <h1 fxLayoutAlign="center">Compras</h1>
   <mat-divider></mat-divider>
 
-  <div fxLayout="column">
+  <div fxLayout="row wrap" fxLayoutAlign="center center">
     <div *ngIf="compras.length == 0; else divCompra">
       <h1>No tienes compras realizadas</h1>
     </div>
     <ng-template #divCompra>
-      <div *ngFor="let compra of compras">
+      <div
+        *ngFor="let compra of compras"
+        fxFlex.xs="100"
+        fxFlex.sm="70"
+        fxFlex="55"
+      >
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title> Fecha: {{ compra.fecha }} </mat-panel-title>
+            <mat-panel-title>
+              Fecha: {{ compra.fecha | date: "d/M/yy, H:mm " }}
+            </mat-panel-title>
             <mat-panel-description>
-              {{ compra.compra.length }} productos comprados | {{}}
+              {{ compra.compra.length | i18nPlural: compraMapa }} |
+              {{ compra.precio | currency }}
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>This is the primary content of the panel.</p>
+          <div>
+            <div *ngFor="let producto of compra.compra">
+              <app-tarjeta-compras [ID]="producto"></app-tarjeta-compras>
+            </div>
+          </div>
         </mat-expansion-panel>
         <mat-divider></mat-divider>
       </div>

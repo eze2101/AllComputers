@@ -78,6 +78,8 @@ export class AuthService {
           compras: resp.compras!,
           roll: resp.roll!,
         };
+        console.log(this._usuario);
+
         return resp.ok;
       }),
       catchError((err) => of(false))
@@ -87,4 +89,11 @@ export class AuthService {
   logOut() {
     localStorage.clear();
   }
+
+  /*
+  verUsuario(id: string): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.baseUrl}/home/user/:${id}`);
+  }
+
+  */
 }
