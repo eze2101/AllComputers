@@ -10,3 +10,11 @@
   margin: 10px;
   margin-bottom: 40px;
 }
+
+.noCategoria {
+  background-color: white;
+  margin: 15px;
+  border-radius: 10px;
+  padding: 15px;
+  padding-bottom: 40px;
+}

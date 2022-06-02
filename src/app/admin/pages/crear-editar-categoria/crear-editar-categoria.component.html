@@ -1,38 +1,92 @@
-<div>
-  <div>
-    <h1>{{ titulo }}</h1>
-    <hr />
-    <form [formGroup]="miFormulario" autocomplete="off">
-      <mat-form-field appearance="fill">
-        <input
-          matInput
-          formControlName="name"
-          placeholder="Nombre de la categoria"
-        />
-      </mat-form-field>
-      <div>
-        <input
-          type="file"
-          placeholder="imagen"
-          (change)="onFileChange($event)"
-          formControlName="file"
-        />
+<div fxLayoutAlign="center center">
+  <div class="container" fxLayout="column" fxFlex="80">
+    <div class="titulo">
+      <h1>{{ titulo }}</h1>
+    </div>
+    <mat-divider></mat-divider>
+    <form
+      [formGroup]="miFormulario"
+      autocomplete="off"
+      fxLayout="row"
+      fxLayout.xs="column"
+    >
+      <div fxFlex="100" fxLayout="column" class="nombres">
+        <mat-label>Nombre:</mat-label>
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            formControlName="name"
+            placeholder="Nombre de la categoria"
+          />
+        </mat-form-field>
+        <mat-label>Ingrese un nombre único para la imagen:</mat-label>
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Nombre" formControlName="img" />
+        </mat-form-field>
+        <span>
+          *(si quiere usar una imagen ya existente, coloque el nombre asignado)
+        </span>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlex="100">
+        <label class="archivo">
+          <input
+            type="file"
+            placeholder="imagen"
+            (change)="onFileChange($event)"
+            formControlName="file"
+            class="archivo"
+          />Seleccionar Imagen
+        </label>
         <img *ngIf="image" src="{{ image }}" alt="" />
-
-        <input type="text" placeholder="Nombre" formControlName="img" />
       </div>
       <!-- <mat-form-field appearance="fill">
         <input matInput formControlName="img" placeholder="img" />
       </mat-form-field> -->
     </form>
-    <div *ngIf="!esEditar()">
-      <button mat-button (click)="cancelar()">Cancelar</button>
-      <button mat-button (click)="CrearCategoria()">Crear</button>
+    <mat-divider></mat-divider>
+    <div *ngIf="!esEditar()" class="botones">
+      <button
+        mat-button
+        (click)="cancelar()"
+        fxFlex="30"
+        class="boton cancelar"
+      >
+        Cancelar
+      </button>
+      <button
+        mat-button
+        (click)="CrearCategoria()"
+        fxFlex="30"
+        class="boton crear"
+      >
+        Crear
+      </button>
     </div>
-    <div *ngIf="esEditar()">
-      <button mat-button (click)="cancelar()">Cancelar</button>
-      <button mat-button (click)="editarCategoria()">Guardar</button>
-      <button mat-button (click)="eliminar(categoria._id!)">Eliminar</button>
+    <div *ngIf="esEditar()" class="botones">
+      <button
+        mat-button
+        (click)="cancelar()"
+        fxFlex="20"
+        class="boton cancelar"
+      >
+        Cancelar
+      </button>
+
+      <button
+        mat-button
+        (click)="eliminar(categoria._id!)"
+        fxFlex="20"
+        class="boton eliminar"
+      >
+        Eliminar</button
+      ><button
+        mat-button
+        (click)="editarCategoria()"
+        fxFlex="20"
+        class="boton crear"
+      >
+        Guardar
+      </button>
     </div>
   </div>
 </div>

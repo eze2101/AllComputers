@@ -1,6 +1,12 @@
-<div *ngIf="!producto; else divProducto">
+<div
+  *ngIf="!producto; else divProducto"
+  fxLayoutAlign="center center"
+  fxLayout="row wrap"
+  class="noProducto"
+>
+  <h2 fxFlex="100" fxLayoutAlign="center">No hay producto con esa Url</h2>
+  //TODO ver loading
   <mat-spinner></mat-spinner>
-  <h2>no hay producto</h2>
 </div>
 
 <ng-template #divProducto>

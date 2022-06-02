@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosService } from 'src/app/client/service/productos.service';
 import { Categoria } from '../../../client/interfaces/prodcuto.interface';
-import { environment } from '../../../../environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
-
 import Swal from 'sweetalert2';
 
 @Component({
@@ -24,7 +21,7 @@ export class CrearEditarCategoriaComponent implements OnInit {
   titulo: string = 'Crear Categoria';
   path!: string | null;
 
-  image: any = '../assets/mazo.jpg';
+  image: any;
   imagen: any;
   file: any;
 

@@ -3,8 +3,8 @@
   <mat-divider></mat-divider>
 
   <div fxLayout="column">
-    <div *ngIf="productos.length == 0; else divProducto">
-      <h1>Tu carrito esta vacio</h1>
+    <div *ngIf="productos.length == 0; else divProducto" fxLayoutAlign="center">
+      <h1 fxLayoutAlign="center center">Su carrito esta vacio</h1>
     </div>
     <ng-template #divProducto>
       <div *ngFor="let producto of productos; index as i">

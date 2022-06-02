@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Producto } from '../../client/interfaces/prodcuto.interface';
+import {
+  Producto,
+  Categoria,
+} from '../../client/interfaces/prodcuto.interface';
 import { ProductosService } from '../../client/service/productos.service';
 import { AuthService } from '../../auth/services/auth.service.service';
 
@@ -13,7 +16,8 @@ export class PorCategoriaComponent implements OnInit {
   productos: Producto[] = [];
   producto!: Producto;
   prodXcate: Producto[] = [];
-  nombre!: any;
+  categoria!: Categoria;
+  nombre!: string;
   admin: boolean = false;
   url!: string;
 
@@ -33,7 +37,15 @@ export class PorCategoriaComponent implements OnInit {
 
   ngOnInit() {
     this.activeRoute.paramMap.subscribe((params: ParamMap) => {
-      this.nombre = params.get('name');
+      this.nombre = params.get('name')!;
+    });
+
+    this.productoService.getCategorias().subscribe((categorias) => {
+      categorias.map((categoria) => {
+        if (categoria.name == this.nombre) {
+          this.categoria = categoria;
+        }
+      });
     });
 
     this.productoService

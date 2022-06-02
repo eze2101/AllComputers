@@ -33,7 +33,7 @@ export class CrearEditarProductoComponent implements OnInit {
   });
   titulo: string = 'Crear Producto';
   path!: string | null;
-  image: any = '../assets/mazo.jpg';
+  image: any;
   imagen: any;
   file: any;
 

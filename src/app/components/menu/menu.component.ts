@@ -26,9 +26,8 @@ export class MenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productosService.getCategorias().subscribe((categorias) => {
-      this.categorias = categorias;
-    });
+    this.categorias = this.authService.categorias;
+
     this.admin = this.authService.admin;
 
     this.breakpointObserver
@@ -42,11 +41,6 @@ export class MenuComponent implements OnInit {
       });
   }
 
-  /*
-if (this.breakpointObserver.isMatched('(min-width: 900px)')) {
-      console.log('pantalla con un minimo de 900px');
-    }
-  */
   logOut() {
     this.router.navigateByUrl('/auth');
     this.authService.logOut();
@@ -56,25 +50,6 @@ if (this.breakpointObserver.isMatched('(min-width: 900px)')) {
     if (this.admin) {
       this.url = '/admin';
     }
-
     this.router.navigateByUrl(`/${this.url}/${nombre}`);
   }
 }
-
-/*
-
- carrito() {
-    this.authService.validarToken().subscribe();
-    this.router.navigateByUrl('/home/carrito');
-  }
-
-
-this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/home/carrito']);
-    });
-
- this.productosService.recargarPagina$.emit(true)
-this.router.navigateByUrl('/home/carrito');
-
-
-*/

@@ -26,9 +26,6 @@ export class CategoriasComponent implements OnInit {
   ngOnInit(): void {
     this.url = this.router.url;
 
-    this.productosService.getCategorias().subscribe((categorias) => {
-      this.categorias = categorias;
-      //TODO arreglar recarga
-    });
+    this.categorias = this.authService.categorias;
   }
 }

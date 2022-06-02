@@ -7,6 +7,7 @@ import { of, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 import { AuthResponse, Usuario } from '../interfaces/auth.interface';
+import { Categoria } from '../../client/interfaces/prodcuto.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +16,18 @@ export class AuthService {
   private baseUrl: string = environment.baseUrl;
 
   private _usuario!: Usuario;
+  private _categorias!: Categoria[];
 
   get usuario() {
     return { ...this._usuario };
+  }
+
+  get categorias() {
+    return this._categorias;
+  }
+
+  get id() {
+    return this._usuario.uid;
   }
 
   get admin() {
@@ -70,6 +80,7 @@ export class AuthService {
     return this.http.get<AuthResponse>(url, { headers }).pipe(
       map((resp) => {
         localStorage.setItem('token', resp.token!);
+        //seteo usuario y categorias para que no recarguen constantemente
         this._usuario = {
           name: resp.name!,
           uid: resp.uid!,
@@ -78,7 +89,9 @@ export class AuthService {
           compras: resp.compras!,
           roll: resp.roll!,
         };
-        console.log(this._usuario);
+        this.getCategorias().subscribe((categorias) => {
+          this._categorias = categorias;
+        });
 
         return resp.ok;
       }),
@@ -90,10 +103,7 @@ export class AuthService {
     localStorage.clear();
   }
 
-  /*
-  verUsuario(id: string): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.baseUrl}/home/user/:${id}`);
+  getCategorias(): Observable<Categoria[]> {
+    return this.http.get<Categoria[]>(`${this.baseUrl}/home/categorias`);
   }
-
-  */
 }

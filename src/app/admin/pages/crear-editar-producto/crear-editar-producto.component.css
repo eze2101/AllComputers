@@ -1,3 +1,58 @@
+.container {
+  background-color: white;
+  margin-top: 15px;
+  border-radius: 15px;
+}
+.titulo {
+  display: flex;
+  justify-content: center;
+}
+
+.nombres {
+  align-items: flex-start;
+  padding-top: 15px;
+  padding-left: 30px;
+}
+
+input[type="file" i] {
+  display: none;
+}
+
+.archivo {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.botones {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boton {
+  background-color: #f2ebeb;
+}
+
+.cancelar:hover {
+  background-color: #bfb4b4;
+}
+
+.crear:hover {
+  background-color: #673ab7e3;
+}
+.eliminar:hover {
+  background-color: rgb(192, 0, 0);
+}
+
+.description {
+  padding: 15px;
+}
+.descripcion {
+  width: 100% !important;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -5,6 +60,24 @@ form {
 }
 
 img {
-  width: 150px;
-  height: 150px;
+  width: 95%;
+  height: auto;
+  max-height: 400px;
+  margin-bottom: 10px;
+}
+
+mat-label {
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+span {
+  margin-bottom: 20px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+label {
+  font-weight: 700;
 }

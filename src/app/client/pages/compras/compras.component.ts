@@ -14,6 +14,7 @@ export class ComprasComponent implements OnInit {
   compras: Compra[] = [];
   productos: Producto[] = [];
   index: number = 0;
+  unidades: number[] = [];
   //para el pipe i18nPlural
   compraMapa = {
     '=1': '1 producto',
@@ -24,33 +25,15 @@ export class ComprasComponent implements OnInit {
     private authService: AuthService,
     private cdref: ChangeDetectorRef,
     private productosServices: ProductosService
-  ) {
-    console.log(this.usuario);
-    this.usuario = this.authService.usuario;
-    this.usuario.compras?.reverse();
-    this.buscarCompras();
-    console.log(this.compras);
-  }
+  ) {}
 
   ngOnInit(): void {
-    if (
-      this.usuario.compras?.length != this.authService.usuario.compras?.length
-    ) {
-      console.log(this.usuario);
+    this.usuario = { ...this.authService.usuario };
 
-      this.buscarCompras();
-      console.log(this.compras);
-      this.cdref.detectChanges();
-    }
-
-    // console.log(this.usuario.compras?.length);
-    // console.log(this.authService.usuario.compras?.length);
-
-    // console.log(
-    //   this.compras.length != this.authService.usuario.compras?.length
-    // );
+    this.buscarCompras();
+    this.compras.reverse();
+    console.log(this.compras.length);
   }
-
   buscarCompras() {
     this.usuario.compras?.map((compra) => this.compras.push(compra));
   }
@@ -74,5 +57,14 @@ export class ComprasComponent implements OnInit {
           });
       }
     });
+  }
+  verUnidades(i: number, compra: Compra) {
+    let numero = 0;
+    compra.compra.map((producto) => {
+      numero += producto.unidades!;
+    });
+    this.unidades[i] = numero;
+    //console.log(this.unidades);
+    //TODO ver xq se dispara el console lgo tantas veces
   }
 }

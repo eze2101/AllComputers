@@ -32,6 +32,8 @@ export class CarritoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.usuario);
+
     this.productosService.usuario$.subscribe((id) => {
       (this.usuario = this.authService.usuario),
         (this.index = this.productos.findIndex((el) => el._id == id)),
@@ -42,7 +44,7 @@ export class CarritoComponent implements OnInit {
     });
 
     this.usuario = this.authService.usuario;
-    // this.usuario = this.authService.verUsuario(this.id);
+
     this.buscarProductos();
   }
 
@@ -68,9 +70,7 @@ export class CarritoComponent implements OnInit {
             this.productosService
               .agregarCompra(this.usuario.uid, this.usuario)
               .subscribe((resp) => {
-                this.authService
-                  .validarToken()
-                  .subscribe((resp) => console.log(resp));
+                this.authService.validarToken().subscribe();
                 this.productosService
                   .vaciarCarrito(this.usuario.uid, this.usuario)
                   .subscribe((resp) =>

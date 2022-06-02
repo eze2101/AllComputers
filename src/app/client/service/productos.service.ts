@@ -14,7 +14,6 @@ export class ProductosService {
 
   private _producto!: Producto[];
 
-  //
   recargarPagina$ = new EventEmitter<boolean>();
   usuario$ = new EventEmitter<any>();
   precioTotal$ = new EventEmitter<number>();
@@ -28,8 +27,6 @@ export class ProductosService {
   precioTotal() {}
 
   crearProducto(producto: Producto) {
-    console.log(producto);
-
     return this.http
       .post<Producto>(`${this.baseUrl}/home/newProduct`, producto)
       .pipe(
@@ -73,8 +70,6 @@ export class ProductosService {
   //CATEGORIA
 
   crearCategoria(categoria: Categoria) {
-    console.log(categoria);
-
     return this.http
       .post<Categoria>(`${this.baseUrl}/home/newCategoria`, categoria)
       .pipe(
@@ -122,14 +117,7 @@ export class ProductosService {
     return this.http.post<object>(`${this.baseUrl}/upload`, form);
   }
 
-  /*editarImagenes(id:string, file:File):Observable<any>{
-    return this.http.put(`${this.baseUrl}/upload`, file)
-
-  }*/
-
   agregarACarrito(id: string, usuario: Usuario): Observable<Usuario> {
-    console.log(id, usuario);
-
     return this.http.put<Usuario>(
       `${this.baseUrl}/home/carrito/${id}`,
       usuario
@@ -162,8 +150,6 @@ export class ProductosService {
   }
 
   vaciarCarrito(id: any, usuario: Usuario): Observable<any> {
-    console.log(id, usuario);
-
     return this.http.put(`${this.baseUrl}/home/carrito/vaciar/${id}`, usuario);
   }
 }

@@ -88,7 +88,7 @@ export class ProductoComponent implements OnInit {
 
     this.productoService.agregarACarrito(this.usuario.uid!, USUARIO).subscribe(
       (ok) => {
-        this.authService.validarToken().subscribe((resp) => console.log(resp));
+        this.authService.validarToken().subscribe();
         Swal.fire({
           title: `Agregado al carrito `,
           text: '¿Quiere seguir comprando?',
