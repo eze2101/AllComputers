@@ -116,9 +116,3 @@ export class ProductoComponent implements OnInit {
     );
   }
 }
-
-/*this.router
-              .navigateByUrl('/', { skipLocationChange: true })
-              .then(() => {
-                this.router.navigate(['/home/carrito']);
-              });*/

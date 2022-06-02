@@ -1,16 +1,27 @@
-<div
-  *ngIf="!categoria; else divCategoria"
-  fxLayoutAlign="center center"
-  fxLayout="row wrap"
-  class="noCategoria"
->
-  <h2 fxFlex="100" fxLayoutAlign="center">No hay Categoria con esa Url</h2>
+<div fxLayoutAlign="center center">
+  <div
+    *ngIf="!categoria; else divCategoria"
+    fxFlex="50"
+    fxFlex.xs="100"
+    fxLayoutAlign="center center"
+    fxLayout="row wrap"
+    class="noCategoria"
+  >
+    <h2 fxFlex="100" fxLayoutAlign="center">No hay Categoria con esa Url</h2>
 
-  <mat-spinner></mat-spinner>
+    <mat-spinner></mat-spinner>
+  </div>
 </div>
 
 <ng-template #divCategoria>
   <div fxLayout="row wrap" fxLayoutAlign="center center" class="categoria">
+    <div
+      *ngIf="categoria && productos.length == 0"
+      fxLayoutAlign="center center"
+      class="noCategoria"
+    >
+      <h1>No hay productos disponibles en esta categoria</h1>
+    </div>
     <div
       fxFlex="15"
       fxFlex.md="20"
