@@ -11,6 +11,7 @@ export interface AuthResponse {
       IDproducto: string;
       unidades: number;
       _id: string;
+      precio: number;
     }
   ];
   compras?: [
@@ -20,6 +21,7 @@ export interface AuthResponse {
           IDproducto: string;
           unidades: number;
           _id: string;
+          precio: number;
         }
       ];
       fecha: string;
@@ -39,6 +41,7 @@ export interface Usuario {
       IDproducto: string;
       unidades: number;
       _id: string;
+      precio: number;
     }
   ];
   compras?: [
@@ -48,6 +51,7 @@ export interface Usuario {
           IDproducto: string;
           unidades: number;
           _id: string;
+          precio: number;
         }
       ];
       fecha: string;

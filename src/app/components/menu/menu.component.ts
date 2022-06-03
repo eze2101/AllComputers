@@ -31,7 +31,7 @@ export class MenuComponent implements OnInit {
     this.admin = this.authService.admin;
 
     this.breakpointObserver
-      .observe(['(min-width: 900px)'])
+      .observe(['(min-width: 1060px)'])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.menuComprimido = false;

@@ -65,6 +65,7 @@ export class TarjetaCarritoComponent implements OnInit {
 
     const PRODUCTO = this.usuario.carrito[index];
     PRODUCTO.unidades = this.usuario.carrito[index].unidades;
+    PRODUCTO.precio = PRODUCTO.unidades * this.producto.price;
 
     this.verPrecio();
 
@@ -78,14 +79,14 @@ export class TarjetaCarritoComponent implements OnInit {
 
     this.productosService
       .editarUnidadesCarrito(this.usuario.uid, USUARIO)
-      .subscribe((resp) => console.log(resp));
+      .subscribe();
   }
 
   eliminar(id: any) {
     const USUARIO: Usuario = {
       name: this.usuario.name,
       email: this.usuario.email,
-      carrito: [{ IDproducto: id!, unidades: 0, _id: id! }],
+      carrito: [{ IDproducto: id!, unidades: 0, _id: id!, precio: 0 }],
     };
 
     this.productosService
@@ -99,10 +100,10 @@ export class TarjetaCarritoComponent implements OnInit {
 
   verPrecio() {
     let precio = {
-      precio: this.producto.price * this.usuario.carrito[this.index].unidades,
+      precio: this.usuario.carrito[this.index].precio,
       index: this.posicion,
     };
-    console.log(precio);
+
     this.price.emit(precio);
   }
 }

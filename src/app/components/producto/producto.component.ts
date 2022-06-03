@@ -82,6 +82,7 @@ export class ProductoComponent implements OnInit {
           IDproducto: this.id,
           unidades: unidades,
           _id: this.id,
+          precio: unidades * this.producto.price,
         },
       ],
     };

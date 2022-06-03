@@ -14,8 +14,8 @@ export class CrearEditarCategoriaComponent implements OnInit {
   id!: string;
   categoria!: Categoria;
   miFormulario: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(4)]],
-    img: ['', [Validators.required]],
+    name: [null, [Validators.required, Validators.minLength(4)]],
+    img: [null, [Validators.required]],
     file: [null],
   });
   titulo: string = 'Crear Categoria';
@@ -48,7 +48,7 @@ export class CrearEditarCategoriaComponent implements OnInit {
 
     const CATEGORIA: Categoria = {
       name: name,
-      img: img,
+      img: img.trim(),
     };
 
     console.log(CATEGORIA);

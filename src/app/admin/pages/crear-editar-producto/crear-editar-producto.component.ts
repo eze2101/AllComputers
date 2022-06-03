@@ -20,15 +20,12 @@ export class CrearEditarProductoComponent implements OnInit {
   producto!: Producto;
   categorias!: Categoria[];
   miFormulario: FormGroup = this.fb.group({
-    name: ['perros', [Validators.required, Validators.minLength(4)]],
-    price: [15, [Validators.required]],
-    stock: [20, [Validators.required]],
-    description: [
-      'asdasdasdas',
-      [Validators.required, Validators.minLength(4)],
-    ],
-    categoria: ['teclados', [Validators.required, Validators.minLength(4)]],
-    img: ['', [Validators.required]],
+    name: [null, [Validators.required, Validators.minLength(4)]],
+    price: [null, [Validators.required]],
+    stock: [null, [Validators.required]],
+    description: [null, [Validators.required, Validators.minLength(4)]],
+    categoria: [null, [Validators.required, Validators.minLength(4)]],
+    img: [null, [Validators.required]],
     file: null,
   });
   titulo: string = 'Crear Producto';
@@ -62,13 +59,14 @@ export class CrearEditarProductoComponent implements OnInit {
   CrearProducto() {
     const { name, price, stock, description, categoria, img } =
       this.miFormulario.value;
+
     const PRODUCTO: Producto = {
       name: name,
       price: price,
       stock: stock,
       description: description,
       categoria: categoria,
-      img: img,
+      img: img.replace(/ /g, ''),
     };
     console.log(PRODUCTO);
 
@@ -137,7 +135,7 @@ export class CrearEditarProductoComponent implements OnInit {
       stock: stock,
       description: description,
       categoria: categoria,
-      img: img,
+      img: img.replace(/ /g, ''),
     };
     console.log(this.producto);
     console.log(this.id);
@@ -195,7 +193,7 @@ export class CrearEditarProductoComponent implements OnInit {
 
     if (form.value.file) {
       this.productoService
-        .uploadImagenes(form.value.img, this.file)
+        .uploadImagenes(form.value.img.replace(/ /g, ''), this.file)
         .subscribe((data) => {
           this.miFormulario.reset;
         });

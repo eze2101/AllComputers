@@ -70,7 +70,6 @@
   max-height: 1000px;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 img {
   width: 50%;
@@ -100,6 +99,7 @@ mat-label {
 }
 span {
   font-size: 20px;
+  font-weight: 700;
 }
 
 .form {

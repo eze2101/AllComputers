@@ -20,22 +20,21 @@
           <mat-spinner></mat-spinner>
         </div>
         <ng-template #divImg>
-          <img src="{{ img.fileUrl }}" alt="imagen producto" />
+          <div fxLayoutAlign="center center">
+            <img src="{{ img.fileUrl }}" alt="imagen producto" />
+          </div>
         </ng-template>
         <mat-divider></mat-divider>
-        <div
-          fxFlex="100"
-          fxLayout="column"
-          fxLayoutAlign="center flex-start"
-          class="container4"
-        >
-          <h3>Descripcion:</h3>
-          <span
-            >{{ producto.description }} Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Explicabo mollitia possimus dolorem. Sapiente
-            accusamus quo dignissimos saepe quia neque animi corporis culpa, ut
-            fuga atque aspernatur, sit dolores soluta facilis!</span
+        <div fxLayout="center">
+          <div
+            fxFlex="100"
+            fxLayout="column"
+            fxLayoutAlign="center flex-start"
+            class="container4"
           >
+            <h3>Descripcion:</h3>
+            <span>{{ producto.description }}</span>
+          </div>
         </div>
       </div>
 

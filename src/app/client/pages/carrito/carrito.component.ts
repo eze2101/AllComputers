@@ -32,8 +32,6 @@ export class CarritoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.usuario);
-
     this.productosService.usuario$.subscribe((id) => {
       (this.usuario = this.authService.usuario),
         (this.index = this.productos.findIndex((el) => el._id == id)),
@@ -44,7 +42,7 @@ export class CarritoComponent implements OnInit {
     });
 
     this.usuario = this.authService.usuario;
-
+    console.log(this.usuario);
     this.buscarProductos();
   }
 
