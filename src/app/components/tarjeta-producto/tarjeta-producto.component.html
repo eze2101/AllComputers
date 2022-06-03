@@ -1,6 +1,6 @@
 <mat-card (click)="verProducto(producto)">
   <mat-card-title>{{ producto.name }}</mat-card-title>
-  <mat-divider></mat-divider>
+
   <mat-card-content>
     <div *ngIf="!img; else divImg">
       <mat-spinner></mat-spinner>

@@ -20,6 +20,10 @@
   margin-bottom: 15px;
 }
 
+.container4 {
+  margin: 0 0 15px 15px;
+}
+
 .noProducto {
   background-color: #3c00bb;
   color: white;
@@ -66,13 +70,13 @@
   max-height: 1000px;
   display: flex;
   justify-content: center;
-
   align-items: center;
 }
 img {
   width: 50%;
   height: 100%;
   max-height: 500px;
+  margin: 10px 0 10px 0;
 }
 @media (max-width: 600px) {
   img {

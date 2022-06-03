@@ -7,9 +7,17 @@ span {
 
 .producto {
   display: flex;
+  align-items: center;
 }
 
 .mat-card:not([class*="mat-elevation-z"]) {
   box-shadow: 0px 2px 1px 3px rgb(0 0 0 / 20%), 0px 1px 1px 1px rgb(0 0 0 / 14%),
     0px 1px 3px 1px rgb(0 0 0 / 12%) !important;
+}
+
+.button {
+  color: #3c00bb;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
 }

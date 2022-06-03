@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductosService } from 'src/app/client/service/productos.service';
 import { Producto } from '../../client/interfaces/prodcuto.interface';
+import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-tarjeta-compras',
@@ -14,8 +16,12 @@ export class TarjetaComprasComponent implements OnInit {
     '=1': '1 producto',
     other: '# productos',
   };
+  url: string = environment.baseUrl + '/home';
 
-  constructor(private productosServices: ProductosService) {}
+  constructor(
+    private productosServices: ProductosService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.productosServices
@@ -23,5 +29,10 @@ export class TarjetaComprasComponent implements OnInit {
       .subscribe((res) => {
         this.producto = res;
       });
+  }
+  verProducto() {
+    this.router.navigateByUrl(
+      `home/${this.producto.categoria}/${this.producto.name}`
+    );
   }
 }

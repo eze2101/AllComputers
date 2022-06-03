@@ -5,11 +5,9 @@
 <ng-template #divPro>
   <mat-card fxLayout="row" class="producto" fxFlex="100">
     <h4 fxFlex="30">{{ producto.name }}</h4>
-    <a
-      fxFlex="20"
-      [routerLink]="['/home/${producto.categoria}/${producto.name}']"
-      >Ver Producto
-    </a>
+    <button mat-button fxFlex="20" (click)="verProducto()" class="button">
+      Ver Producto
+    </button>
 
     <span fxFlex="50">
       {{ ID.unidades | i18nPlural: ProductoMapa }} |
