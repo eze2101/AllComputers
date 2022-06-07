@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ValidarTokenGuard } from './guards/validar-token.guard';
-import { ErrorComponent } from './shared/error/error.component';
 
 const routes: Routes = [
   {
@@ -25,7 +24,7 @@ const routes: Routes = [
 
   {
     path: '404',
-    component: ErrorComponent,
+    redirectTo: 'auth',
   },
   {
     path: '**',

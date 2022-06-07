@@ -5,11 +5,16 @@
 <ng-template #divPro>
   <mat-card fxLayout="row" class="producto" fxFlex="100">
     <h4 fxFlex="30">{{ producto.name }}</h4>
-    <button mat-button fxFlex="20" (click)="verProducto()" class="button">
+    <button
+      mat-button
+      (click)="verProducto()"
+      (auxclick)="otraPestana()"
+      class="button"
+    >
       Ver Producto
     </button>
 
-    <span fxFlex="50">
+    <span>
       {{ ID.unidades | i18nPlural: ProductoMapa }} |
       {{ producto.price * ID.unidades | currency }}
     </span>

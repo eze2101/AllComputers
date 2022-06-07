@@ -35,4 +35,11 @@ export class TarjetaComprasComponent implements OnInit {
       `home/${this.producto.categoria}/${this.producto.name}`
     );
   }
+
+  otraPestana() {
+    window.open(
+      `http://localhost:4200/home/${this.producto.categoria}/${this.producto.name}`,
+      '_blank'
+    );
+  }
 }

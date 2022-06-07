@@ -2,12 +2,25 @@ h4 {
   margin-block: 0;
 }
 span {
-  margin-left: 10px;
+  max-width: 50%;
+}
+
+@media (max-width: 550px) {
+  .button {
+    max-width: 35% !important;
+    padding: 0px !important;
+  }
+
+  span {
+    max-width: 32%;
+    margin-left: 12px;
+  }
 }
 
 .producto {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .mat-card:not([class*="mat-elevation-z"]) {
@@ -16,6 +29,7 @@ span {
 }
 
 .button {
+  max-width: 20%;
   color: #3c00bb;
   font-weight: 700;
   display: flex;
