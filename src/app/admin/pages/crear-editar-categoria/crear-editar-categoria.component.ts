@@ -93,7 +93,6 @@ export class CrearEditarCategoriaComponent implements OnInit {
             img: resp[0].img,
             file: null,
           });
-          console.log(this.miFormulario.value);
         });
     }
   }
@@ -101,7 +100,6 @@ export class CrearEditarCategoriaComponent implements OnInit {
     this.productoService.getImagen(this.categoria.img).subscribe((resp) => {
       this.image = resp.fileUrl;
       this.imagen = resp;
-      console.log(this.imagen);
     });
   }
 
@@ -176,7 +174,7 @@ export class CrearEditarCategoriaComponent implements OnInit {
   subir() {
     const form = this.miFormulario;
 
-    console.log(this.miFormulario.value.file);
+    console.log(this.miFormulario.value);
 
     if (form.value.file) {
       this.productoService
@@ -184,7 +182,6 @@ export class CrearEditarCategoriaComponent implements OnInit {
         .subscribe((data) => {
           this.miFormulario.reset;
         });
-      this.image = '../assets/mazo.jpg';
     } else {
       console.log('no entro');
     }

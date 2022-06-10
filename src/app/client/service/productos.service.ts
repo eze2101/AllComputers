@@ -113,6 +113,7 @@ export class ProductosService {
     const form = new FormData();
     form.append('name', name);
     form.append('file', file, 'form-data');
+    console.log(form);
 
     return this.http.post<object>(`${this.baseUrl}/upload`, form);
   }

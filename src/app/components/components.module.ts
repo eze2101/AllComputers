@@ -10,7 +10,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { PorCategoriaComponent } from './por-categoria/por-categoria.component';
 import { ProductoComponent } from './producto/producto.component';
 import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.component';
-import { SubirImagenComponent } from './subir-imagen/subir-imagen.component';
+
 import { TarjetaCategoriaComponent } from './tarjeta-categoria/tarjeta-categoria.component';
 import { TarjetaCarritoComponent } from './tarjeta-carrito/tarjeta-carrito.component';
 import { TarjetaComprasComponent } from './tarjeta-compras/tarjeta-compras.component';
@@ -23,7 +23,7 @@ import { TarjetaComprasComponent } from './tarjeta-compras/tarjeta-compras.compo
     PorCategoriaComponent,
     ProductoComponent,
     TarjetaProductoComponent,
-    SubirImagenComponent,
+
     TarjetaCategoriaComponent,
     TarjetaCarritoComponent,
     TarjetaComprasComponent,
@@ -43,7 +43,7 @@ import { TarjetaComprasComponent } from './tarjeta-compras/tarjeta-compras.compo
     PorCategoriaComponent,
     ProductoComponent,
     TarjetaProductoComponent,
-    SubirImagenComponent,
+
     TarjetaCategoriaComponent,
     TarjetaCarritoComponent,
     TarjetaComprasComponent,
