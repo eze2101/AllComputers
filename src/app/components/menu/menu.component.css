@@ -58,11 +58,7 @@
   display: flex !important;
   align-items: center !important;
 }
-/*
-::ng-deep .cdk-overlay-connected-position-bounding-box {
-  position: relative;
-}
-*/
+
 ::ng-deep .mat-menu-panel button {
   width: 100%;
 }
@@ -94,14 +90,6 @@
   background: rgb(95 24 245);
   box-shadow: 1px 1px 8px rgb(0 0 0);
 }
-
-/*  animation: pulsate 1s ease-in-out;
-@keyframes pulsate {
-  0% {
-    box-shadow: 0 0 10px rgb(189, 18, 189), 0 0 20px rgb(142, 16, 180);
-  }
-}
- */
 
 .mat-form-field {
   display: contents;

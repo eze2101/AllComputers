@@ -1,10 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductosService } from 'src/app/client/service/productos.service';
-import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+
+import { ProductosService } from 'src/app/client/service/productos.service';
 import {
   Producto,
   Categoria,
@@ -16,9 +15,6 @@ import {
   styleUrls: ['./crear-editar-producto.component.css'],
 })
 export class CrearEditarProductoComponent implements OnInit {
-  id!: string;
-  producto!: Producto;
-  categorias!: Categoria[];
   miFormulario: FormGroup = this.fb.group({
     name: [null, [Validators.required, Validators.minLength(4)]],
     price: [null, [Validators.required]],
@@ -28,29 +24,25 @@ export class CrearEditarProductoComponent implements OnInit {
     img: [null, [Validators.required]],
     file: null,
   });
+  id!: string;
+  producto!: Producto;
+  categorias!: Categoria[];
   titulo: string = 'Crear Producto';
   path!: string | null;
   image: any;
-  imagen: any;
   file: any;
 
   constructor(
-    private productoService: ProductosService,
     private activeRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private productoService: ProductosService
   ) {
     this.path = this.activeRoute.snapshot.paramMap.get('name');
-    console.log(this.path);
-
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };
   }
 
   ngOnInit(): void {
     this.Editar();
-
     this.productoService.getCategorias().subscribe((categorias) => {
       this.categorias = categorias;
     });
@@ -68,11 +60,11 @@ export class CrearEditarProductoComponent implements OnInit {
       categoria: categoria,
       img: img.replace(/ /g, ''),
     };
-    console.log(PRODUCTO);
 
     this.productoService.crearProducto(PRODUCTO).subscribe((ok) => {
       if (ok === true) {
         this.subir();
+
         Swal.fire({
           icon: 'success',
           title: 'Producto creado',
@@ -121,8 +113,6 @@ export class CrearEditarProductoComponent implements OnInit {
   buscarImagen() {
     this.productoService.getImagen(this.producto.img).subscribe((resp) => {
       this.image = resp.fileUrl;
-      this.imagen = resp;
-      console.log(this.imagen);
     });
   }
 
@@ -137,8 +127,6 @@ export class CrearEditarProductoComponent implements OnInit {
       categoria: categoria,
       img: img.replace(/ /g, ''),
     };
-    console.log(this.producto);
-    console.log(this.id);
 
     this.productoService.editarProducto(this.id!, PRODUCTO).subscribe((ok) => {
       if (ok.ok === true) {
@@ -174,7 +162,7 @@ export class CrearEditarProductoComponent implements OnInit {
       confirmButtonText: 'Si, eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.productoService.eliminarProducto(id).subscribe((resp) => resp);
+        this.productoService.eliminarProducto(id).subscribe();
         Swal.fire({
           title: 'Eliminada!',
           text: 'Producto eliminado correctamente.',
@@ -188,16 +176,12 @@ export class CrearEditarProductoComponent implements OnInit {
 
   subir() {
     const form = this.miFormulario;
-
-    console.log(this.miFormulario.value.file);
-
     if (form.value.file) {
       this.productoService
         .uploadImagenes(form.value.img.replace(/ /g, ''), this.file)
         .subscribe((data) => {
           this.miFormulario.reset;
         });
-      this.image = '../assets/mazo.jpg';
     } else {
       console.log('no entro');
     }

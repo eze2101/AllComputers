@@ -23,13 +23,19 @@
 
         <mat-label>Precio:</mat-label>
         <mat-form-field appearance="fill">
-          <input matInput formControlName="price" placeholder="precio" />
+          <input
+            matInput
+            type="number"
+            formControlName="price"
+            placeholder="precio"
+          />
         </mat-form-field>
 
         <mat-label>Unidades disponibles:</mat-label>
         <mat-form-field appearance="fill">
           <input
             matInput
+            type="number"
             formControlName="stock"
             placeholder="unidades disponibles"
           />

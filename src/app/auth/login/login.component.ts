@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+
 import { AuthService } from '../services/auth.service.service';
-import { Usuario } from '../interfaces/auth.interface';
 
 @Component({
   selector: 'app-login',
@@ -11,21 +11,17 @@ import { Usuario } from '../interfaces/auth.interface';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  hide = true;
   miFormulario: FormGroup = this.fb.group({
     email: [null, [Validators.required, Validators.email]],
     password: [null, [Validators.required, Validators.minLength(6)]],
   });
+  hide = true;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
-  ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };
-  }
+  ) {}
 
   ngOnInit(): void {}
 

@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProductosService } from 'src/app/client/service/productos.service';
-import { Producto } from '../../client/interfaces/prodcuto.interface';
 import { Router } from '@angular/router';
+
 import { environment } from '../../../environments/environment';
+import { ProductosService } from 'src/app/client/service/productos.service';
+
+import { Producto } from '../../client/interfaces/prodcuto.interface';
 
 @Component({
   selector: 'app-tarjeta-compras',
@@ -12,6 +14,7 @@ import { environment } from '../../../environments/environment';
 export class TarjetaComprasComponent implements OnInit {
   @Input() ID: any;
   producto!: Producto;
+  //para el pipe i18nPlural
   ProductoMapa = {
     '=1': '1 producto',
     other: '# productos',
@@ -19,8 +22,8 @@ export class TarjetaComprasComponent implements OnInit {
   url: string = environment.baseUrl + '/home';
 
   constructor(
-    private productosServices: ProductosService,
-    private router: Router
+    private router: Router,
+    private productosServices: ProductosService
   ) {}
 
   ngOnInit(): void {

@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { catchError, map, tap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 
@@ -14,7 +13,6 @@ import { Categoria } from '../../client/interfaces/prodcuto.interface';
 })
 export class AuthService {
   private baseUrl: string = environment.baseUrl;
-
   private _usuario!: Usuario;
   private _categorias!: Categoria[];
 
@@ -80,7 +78,7 @@ export class AuthService {
     return this.http.get<AuthResponse>(url, { headers }).pipe(
       map((resp) => {
         localStorage.setItem('token', resp.token!);
-        //seteo usuario y categorias para que no recarguen constantemente
+        //seteo usuario y categorias
         this._usuario = {
           name: resp.name!,
           uid: resp.uid!,

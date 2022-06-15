@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+
+import { ProductosService } from '../../client/service/productos.service';
+import { AuthService } from '../../auth/services/auth.service.service';
 import {
   Producto,
   Categoria,
 } from '../../client/interfaces/prodcuto.interface';
-import { ProductosService } from '../../client/service/productos.service';
-import { AuthService } from '../../auth/services/auth.service.service';
 
 @Component({
   selector: 'app-por-categoria',
@@ -22,9 +23,9 @@ export class PorCategoriaComponent implements OnInit {
   url!: string;
 
   constructor(
-    private productoService: ProductosService,
-    private router: Router,
     private activeRoute: ActivatedRoute,
+    private router: Router,
+    private productoService: ProductosService,
     private authService: AuthService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {

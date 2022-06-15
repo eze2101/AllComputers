@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Categoria } from '../../client/interfaces/prodcuto.interface';
-import { ProductosService } from '../../client/service/productos.service';
 import { Router } from '@angular/router';
+
 import { AuthService } from 'src/app/auth/services/auth.service.service';
+import { Categoria } from '../../client/interfaces/prodcuto.interface';
 
 @Component({
   selector: 'app-categorias',
@@ -11,21 +11,18 @@ import { AuthService } from 'src/app/auth/services/auth.service.service';
 })
 export class CategoriasComponent implements OnInit {
   categorias!: Categoria[];
-  img!: any;
   admin: boolean = false;
   url!: string;
 
-  constructor(
-    private productosService: ProductosService,
-    private router: Router,
-    private authService: AuthService
-  ) {
+  constructor(private router: Router, private authService: AuthService) {
     this.admin = this.authService.admin;
   }
 
   ngOnInit(): void {
     this.url = this.router.url;
 
-    this.categorias = this.authService.categorias;
+    this.authService.getCategorias().subscribe((categorias) => {
+      this.categorias = categorias;
+    });
   }
 }

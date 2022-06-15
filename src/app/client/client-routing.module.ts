@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductoComponent } from '../components/producto/producto.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
 import { CategoriasComponent } from '../components/categorias/categorias.component';
+import { ComprasComponent } from './pages/compras/compras.component';
+import { HomeCategoriaComponent } from './pages/home/home-categoria/home-categoria.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PorCategoriaComponent } from '../components/por-categoria/por-categoria.component';
-import { HomeCategoriaComponent } from './pages/home/home-categoria/listado.component';
-import { CarritoComponent } from './pages/carrito/carrito.component';
-import { ComprasComponent } from './pages/compras/compras.component';
+import { ProductoComponent } from '../components/producto/producto.component';
 
 const routes: Routes = [
   {

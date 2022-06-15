@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductosService } from 'src/app/client/service/productos.service';
-import { Categoria } from '../../../client/interfaces/prodcuto.interface';
 import Swal from 'sweetalert2';
+
+import { ProductosService } from 'src/app/client/service/productos.service';
+import { AuthService } from '../../../auth/services/auth.service.service';
+import { Categoria } from '../../../client/interfaces/prodcuto.interface';
 
 @Component({
   selector: 'app-crear-editar-categoria',
@@ -11,32 +13,26 @@ import Swal from 'sweetalert2';
   styleUrls: ['./crear-editar-categoria.component.css'],
 })
 export class CrearEditarCategoriaComponent implements OnInit {
-  id!: string;
-  categoria!: Categoria;
   miFormulario: FormGroup = this.fb.group({
     name: [null, [Validators.required, Validators.minLength(4)]],
     img: [null, [Validators.required]],
     file: [null],
   });
+  id!: string;
+  categoria!: Categoria;
   titulo: string = 'Crear Categoria';
   path!: string | null;
-
   image: any;
-  imagen: any;
   file: any;
 
   constructor(
-    private productoService: ProductosService,
     private activeRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private productoService: ProductosService,
+    private authService: AuthService
   ) {
     this.path = this.activeRoute.snapshot.paramMap.get('name');
-    console.log(this.path);
-
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };
   }
 
   ngOnInit(): void {
@@ -50,8 +46,6 @@ export class CrearEditarCategoriaComponent implements OnInit {
       name: name,
       img: img.trim(),
     };
-
-    console.log(CATEGORIA);
 
     this.productoService.crearCategoria(CATEGORIA).subscribe((ok) => {
       if (ok === true) {
@@ -99,7 +93,6 @@ export class CrearEditarCategoriaComponent implements OnInit {
   buscarImagen() {
     this.productoService.getImagen(this.categoria.img).subscribe((resp) => {
       this.image = resp.fileUrl;
-      this.imagen = resp;
     });
   }
 
@@ -112,10 +105,9 @@ export class CrearEditarCategoriaComponent implements OnInit {
 
     this.productoService.editarCategoria(this.id!, CATEGORIAS).subscribe(
       (ok) => {
-        console.log(ok);
-
         if (ok.ok === true) {
           this.subir();
+
           Swal.fire({
             icon: 'success',
             title: `Categoria ${name} actualizada!`,
@@ -173,9 +165,6 @@ export class CrearEditarCategoriaComponent implements OnInit {
 
   subir() {
     const form = this.miFormulario;
-
-    console.log(this.miFormulario.value);
-
     if (form.value.file) {
       this.productoService
         .uploadImagenes(form.value.img, this.file)

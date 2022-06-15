@@ -6,12 +6,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { Producto } from '../../client/interfaces/prodcuto.interface';
-import { AuthService } from '../../auth/services/auth.service.service';
-import { Usuario } from '../../auth/interfaces/auth.interface';
 import { NgForm } from '@angular/forms';
+
+import { AuthService } from '../../auth/services/auth.service.service';
 import { ProductosService } from '../../client/service/productos.service';
-import { Router } from '@angular/router';
+
+import { Producto } from '../../client/interfaces/prodcuto.interface';
+import { Usuario } from '../../auth/interfaces/auth.interface';
 
 @Component({
   selector: 'app-tarjeta-carrito',
@@ -19,7 +20,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./tarjeta-carrito.component.css'],
 })
 export class TarjetaCarritoComponent implements OnInit {
-  @ViewChild('miFormulario') miFormulario!: NgForm;
   @Input() producto!: Producto;
   @Input() posicion!: number;
   @Output() price: EventEmitter<any> = new EventEmitter<any>();
@@ -32,8 +32,7 @@ export class TarjetaCarritoComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private productosService: ProductosService,
-    private router: Router
+    private productosService: ProductosService
   ) {}
 
   ngOnInit(): void {

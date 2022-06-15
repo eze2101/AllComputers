@@ -1,9 +1,10 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { tap, map, catchError } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
 import { Categoria, Producto } from '../interfaces/prodcuto.interface';
-import { Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { tap, map, catchError } from 'rxjs/operators';
 import { Usuario } from '../../auth/interfaces/auth.interface';
 
 @Injectable({
@@ -11,12 +12,9 @@ import { Usuario } from '../../auth/interfaces/auth.interface';
 })
 export class ProductosService {
   private baseUrl: string = environment.baseUrl;
-
   private _producto!: Producto[];
 
-  recargarPagina$ = new EventEmitter<boolean>();
   usuario$ = new EventEmitter<any>();
-  precioTotal$ = new EventEmitter<number>();
 
   get producto() {
     return { ...this._producto };
@@ -24,7 +22,7 @@ export class ProductosService {
 
   constructor(private http: HttpClient) {}
 
-  precioTotal() {}
+  //PRODUCTOS
 
   crearProducto(producto: Producto) {
     return this.http
@@ -118,6 +116,8 @@ export class ProductosService {
     return this.http.post<object>(`${this.baseUrl}/upload`, form);
   }
 
+  // CARRITO
+
   agregarACarrito(id: string, usuario: Usuario): Observable<Usuario> {
     return this.http.put<Usuario>(
       `${this.baseUrl}/home/carrito/${id}`,
@@ -139,6 +139,10 @@ export class ProductosService {
     );
   }
 
+  vaciarCarrito(id: any, usuario: Usuario): Observable<any> {
+    return this.http.put(`${this.baseUrl}/home/carrito/vaciar/${id}`, usuario);
+  }
+
   agregarCompra(id: any, usuario: Usuario): Observable<Usuario> {
     return this.http.put<Usuario>(
       `${this.baseUrl}/home/compras/${id}`,
@@ -148,9 +152,5 @@ export class ProductosService {
 
   procesarCompra(id: any, usuario: Usuario): Observable<any> {
     return this.http.put(`${this.baseUrl}/home/carrito/comprar/${id}`, usuario);
-  }
-
-  vaciarCarrito(id: any, usuario: Usuario): Observable<any> {
-    return this.http.put(`${this.baseUrl}/home/carrito/vaciar/${id}`, usuario);
   }
 }

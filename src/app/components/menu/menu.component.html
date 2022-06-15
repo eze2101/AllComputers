@@ -1,7 +1,7 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <div fxLayout="row" class="menuSuperior">
-      <span fxFlex="30" class="titulo">All Computers</span>
+      <span fxFlex="30" fxFlex.xs="60" class="titulo">All Computers</span>
       <app-buscar fxFlex="30" *ngIf="!menuComprimido"></app-buscar>
       <div fxLayout="row" *ngIf="!menuComprimido; else MenuComprimido">
         <button mat-button *ngIf="!admin" [routerLink]="['/home/carrito']">

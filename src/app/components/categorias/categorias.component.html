@@ -1,15 +1,31 @@
-<div fxLayout="row wrap" fxLayoutAlign="center center" class="categorias">
+<div fxLayoutAlign="center center">
   <div
-    fxFlex="15"
-    fxFlex.md="20"
-    fxFlex.sm="30"
-    fxFlex.xs="40"
-    *ngFor="let categoria of categorias"
-    class="categoria"
+    *ngIf="!categorias; else divCategorias"
+    fxFlex="50"
+    fxFlex.xs="100"
+    fxLayoutAlign="center center"
+    fxLayout="row wrap"
+    class="noProducto"
   >
-    <app-tarjeta-categoria
-      [categoria]="categoria"
-      [url]="url"
-    ></app-tarjeta-categoria>
+    <h2 fxFlex="100" fxLayoutAlign="center">No hay producto con esa Url</h2>
+    <mat-spinner></mat-spinner>
   </div>
 </div>
+
+<ng-template #divCategorias>
+  <div fxLayout="row wrap" fxLayoutAlign="center center" class="categorias">
+    <div
+      fxFlex="15"
+      fxFlex.md="20"
+      fxFlex.sm="30"
+      fxFlex.xs="40"
+      *ngFor="let categoria of categorias"
+      class="categoria"
+    >
+      <app-tarjeta-categoria
+        [categoria]="categoria"
+        [url]="url"
+      ></app-tarjeta-categoria>
+    </div>
+  </div>
+</ng-template>

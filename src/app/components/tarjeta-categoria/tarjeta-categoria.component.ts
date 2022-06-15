@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Categoria } from '../../client/interfaces/prodcuto.interface';
 import { Router } from '@angular/router';
-import { ProductosService } from '../../client/service/productos.service';
+
 import { AuthService } from '../../auth/services/auth.service.service';
+import { ProductosService } from '../../client/service/productos.service';
+
+import { Categoria } from '../../client/interfaces/prodcuto.interface';
 
 @Component({
   selector: 'app-tarjeta-categoria',

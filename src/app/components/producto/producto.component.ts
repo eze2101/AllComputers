@@ -1,8 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Producto } from '../../client/interfaces/prodcuto.interface';
-import { ProductosService } from '../../client/service/productos.service';
-import { AuthService } from '../../auth/services/auth.service.service';
 import {
   FormGroup,
   Validators,
@@ -10,6 +7,11 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
+
+import { ProductosService } from '../../client/service/productos.service';
+import { AuthService } from '../../auth/services/auth.service.service';
+
+import { Producto } from '../../client/interfaces/prodcuto.interface';
 import { Usuario } from '../../auth/interfaces/auth.interface';
 
 @Component({
@@ -18,6 +20,16 @@ import { Usuario } from '../../auth/interfaces/auth.interface';
   styleUrls: ['./producto.component.css'],
 })
 export class ProductoComponent implements OnInit {
+  miFormulario: FormGroup = this.fb.group({
+    unidades: [
+      null,
+      [
+        Validators.required,
+        Validators.min(1),
+        (control: AbstractControl) => Validators.max(this.stock)(control),
+      ],
+    ],
+  });
   producto!: Producto;
   id!: string;
   path!: string;
@@ -26,27 +38,15 @@ export class ProductoComponent implements OnInit {
   stock: number = 0;
   usuario!: Usuario;
 
-  miFormulario: FormGroup = this.fb.group({
-    unidades: [
-      '',
-      [
-        Validators.required,
-        Validators.min(1),
-        (control: AbstractControl) => Validators.max(this.stock)(control),
-      ],
-    ],
-  });
-
   constructor(
-    private productoService: ProductosService,
     private activeRoute: ActivatedRoute,
-    private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private productoService: ProductosService
   ) {
     this.admin = this.authService.admin;
     this.usuario = this.authService.usuario;
-    console.log(this.usuario);
   }
 
   ngOnInit() {

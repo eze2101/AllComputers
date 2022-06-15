@@ -1,5 +1,5 @@
 <mat-card (click)="verProducto(producto)">
-  <mat-card-title>{{ producto.name }}</mat-card-title>
+  <mat-card-title>{{ producto.name | titlecase }}</mat-card-title>
 
   <mat-card-content fxLayoutAlign="center center">
     <div *ngIf="!img; else divImg">

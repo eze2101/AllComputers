@@ -1,9 +1,8 @@
 html,
 body {
   height: 100%;
-  /* TODO cambiar imagen a Local */
 
-  background-image: url("https://fondosmil.com/fondo/12586.jpg");
+  background-image: url("https://res.cloudinary.com/dsbzcd3d8/image/upload/v1655130854/oyxzaywfdn1nlveupgzb.jpg");
 }
 body {
   margin: 0;

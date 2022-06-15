@@ -7,17 +7,7 @@ import { ProductosService } from '../../client/service/productos.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  img: any;
-
   constructor(private productosService: ProductosService) {}
 
-  ngOnInit(): void {
-    this.buscarImagen();
-  }
-
-  buscarImagen() {
-    this.productosService.getImagen('logo').subscribe((resp) => {
-      this.img = resp;
-    });
-  }
+  ngOnInit(): void {}
 }

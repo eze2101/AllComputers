@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Categoria } from 'src/app/client/interfaces/prodcuto.interface';
-import { ProductosService } from 'src/app/client/service/productos.service';
-import { Usuario } from '../../auth/interfaces/auth.interface';
-import { AuthService } from '../../auth/services/auth.service.service';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+
+import { AuthService } from '../../auth/services/auth.service.service';
+
+import { Categoria } from 'src/app/client/interfaces/prodcuto.interface';
+import { Usuario } from '../../auth/interfaces/auth.interface';
 
 @Component({
   selector: 'app-menu',
@@ -20,14 +21,12 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
-    private productosService: ProductosService,
-    public breakpointObserver: BreakpointObserver
+    public breakpointObserver: BreakpointObserver,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.categorias = this.authService.categorias;
-
     this.admin = this.authService.admin;
 
     this.breakpointObserver

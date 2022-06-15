@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Compra, Usuario } from '../../../auth/interfaces/auth.interface';
 import { AuthService } from '../../../auth/services/auth.service.service';
 import { Producto } from '../../interfaces/prodcuto.interface';
@@ -23,16 +23,13 @@ export class ComprasComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private cdref: ChangeDetectorRef,
     private productosServices: ProductosService
   ) {}
 
   ngOnInit(): void {
     this.usuario = { ...this.authService.usuario };
-
     this.buscarCompras();
     this.compras.reverse();
-    console.log(this.compras.length);
   }
   buscarCompras() {
     this.usuario.compras?.map((compra) => this.compras.push(compra));
@@ -64,7 +61,5 @@ export class ComprasComponent implements OnInit {
       numero += producto.unidades!;
     });
     this.unidades[i] = numero;
-    //console.log(this.unidades);
-    //TODO ver xq se dispara el console lgo tantas veces
   }
 }
